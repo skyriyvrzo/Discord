@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import com.get.discord.autorole.log.LogGUI;
+import com.get.discord.autorole.util.CheckVersion;
 import com.get.discord.autorole.util.Reference;
 import com.get.lib.logutils.LogUtil;
 
@@ -34,6 +35,8 @@ public class AutoRole {
     		writer.write("tokenID: MTIwMTg1NDM3MjI4NDQ4MTU0Ng.GWuk80.iYPf8XeM740pHvdIC3imBGU5xuPjdm2gAPWyV0");
     		writer.close();
     	}
+		
+		CheckVersion.changeVersionFile();
 		
 		log.mkdir();
 		new LogGUI();
