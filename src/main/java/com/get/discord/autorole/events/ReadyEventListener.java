@@ -12,9 +12,16 @@ public class ReadyEventListener implements EventListener{
 
 	@Override
 	public void onEvent(GenericEvent event) {
-		System.out.println(event);
-		if(event instanceof ReadyEvent && !(event instanceof GatewayPingEvent)) {
-			LogGUI.setLog(AutoRole.log.getEvent(event.toString(), "bot is ready."));
+		//System.out.println(event);
+		if(event instanceof ReadyEvent) {
+			System.out.println("bot is now online.");
+			LogGUI.setLog(AutoRole.log.getEvent(event.toString(), "bot is now online."));
+			LogGUI.setLog(AutoRole.log.getInfo("For help, type\"help\" or \"?\""));
+		}
+		
+		if(!(event instanceof GatewayPingEvent)) {
+			System.out.println(event);
+			LogGUI.setLog(AutoRole.log.getEvent(event.toString(), event.toString()));
 		}
 	}
 

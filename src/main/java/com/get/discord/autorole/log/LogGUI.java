@@ -22,7 +22,7 @@ public class LogGUI implements KeyListener {
 	private static JTextArea ta;
 	private static JTextField tf;
 	public LogGUI() {
-		f = new JFrame("[Discord] AutoRole (" + Reference.VERSIONS + ")");
+		f = new JFrame("[Discord] AutoRole (" + Reference.VERSIONS + ")" + "     For help, type\"help\" or \"?\"");
 		f.setSize(802, 501);
 		f.setLayout(null);
 		f.setFocusable(false);
@@ -34,8 +34,7 @@ public class LogGUI implements KeyListener {
 		ta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		ta.setFocusable(false);
 		ta.setEditable(false);
-		DefaultCaret caret = (DefaultCaret)ta.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		
 		f.add(ta);
 		
 		tf = new JTextField();
@@ -50,11 +49,14 @@ public class LogGUI implements KeyListener {
 		f.setLocationRelativeTo(null);
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		DefaultCaret caret = (DefaultCaret)ta.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        
 		f.setVisible(true);
 		
 		Bot.runBot();
 		
-		LogGUI.setLog(AutoRole.log.getInfo("For help, type\"help\" or \"?\""));
 	}
 	
 	public static void setLog(String s) {

@@ -30,7 +30,8 @@ public class AutoRole {
     		FileWriter writer = new FileWriter(directory + "\\config.properties", true);
     		
     		writer.write("version: "+Reference.VERSIONS +"\n");
-    		writer.write("roleID: 00000000000");
+    		writer.write("roleID: 00000000000\n");
+    		writer.write("tokenID: MTIwMTg1NDM3MjI4NDQ4MTU0Ng.GWuk80.iYPf8XeM740pHvdIC3imBGU5xuPjdm2gAPWyV0");
     		writer.close();
     	}
 		
