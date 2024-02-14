@@ -1,0 +1,35 @@
+package com.get.discord.autorole.events;
+
+import java.io.FileReader;
+import java.io.IOException;
+
+import com.get.discord.autorole.AutoRole;
+import com.get.discord.autorole.log.LogGUI;
+
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+public class GuildMemberJoinEventListener extends ListenerAdapter{
+
+	@Override
+	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+		super.onGuildMemberJoin(event);
+		System.out.println(event);
+		LogGUI.setLog(AutoRole.log.getEvent(event.toString(), event.getMember().toString()));
+		
+		try {
+			AutoRole.properties.load(new FileReader(AutoRole.directory + "\\config.properties"));
+		} catch (IOException e) {
+			LogGUI.setLog(AutoRole.log.getError(GuildMemberJoinEventListener.class, e.getMessage()));
+		}
+		String roldID = AutoRole.properties.getProperty("roleID");
+		
+		try {
+			event.getGuild().addRoleToMember(event.getMember().getUser(), event.getGuild().getRoleById(roldID)).queue();
+		}catch(Exception e) {
+			LogGUI.setLog(AutoRole.log.getError(GuildMemberJoinEventListener.class, e.getMessage()));
+		}
+		
+	}
+	
+}
