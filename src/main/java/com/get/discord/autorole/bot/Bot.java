@@ -28,7 +28,7 @@ public class Bot {
 		System.out.println(botToken);
 		jda = JDABuilder.createDefault(botToken);
 		
-		jda.setActivity(Activity.customStatus("Scout ʟօɮɮʏ"))
+		jda.setActivity(Activity.customStatus("Seeing ʟᴏʙʙʏ"))
 		.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT)
 		.addEventListeners(new ReadyEventListener())
 		.addEventListeners(new GuildMemberJoinEventListener())
