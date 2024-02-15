@@ -8,7 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.get.discord.autorole.log.LogGUI;
+import com.get.discord.autorole.gui.GPanel;
+import com.get.discord.autorole.gui.LogGUI;
 import com.get.discord.autorole.util.CheckVersion;
 import com.get.discord.autorole.util.Reference;
 import com.get.lib.logutils.LogUtil;
@@ -62,7 +63,7 @@ public class AutoRole {
 		
 		writer.close();
 		
-		LogGUI.setLog(AutoRole.log.getWarning("Please restart program."));
+		GPanel.setLog(AutoRole.log.getWarning("Please restart program."));
 		//Bot.buildBot();
 	}
 }

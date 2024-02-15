@@ -1,4 +1,4 @@
-package com.get.discord.autorole.log;
+package com.get.discord.autorole.gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -6,10 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.text.DefaultCaret;
+import javax.swing.border.Border;
 
 import com.get.discord.autorole.AutoRole;
 import com.get.discord.autorole.bot.Bot;
@@ -19,27 +19,20 @@ import com.get.discord.autorole.util.Reference;
 public class LogGUI implements KeyListener {
 
 	public JFrame f;
-	private static JTextArea ta;
 	private static JTextField tf;
 	public LogGUI() {
+		Border lineBorder = BorderFactory.createLineBorder(Color.black);
 		f = new JFrame("[Discord] AutoRole (" + Reference.VERSIONS + ")" + "     For help, type\"help\" or \"?\"");
 		f.setSize(802, 501);
 		f.setLayout(null);
 		f.setFocusable(false);
 		
-		ta = new JTextArea();
-		ta.setLayout(null);
-		ta.setBounds(0, 1, 800, 435);
-		ta.setBackground(Color.WHITE);
-		ta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		ta.setFocusable(false);
-		ta.setEditable(false);
-		
-		f.add(ta);
+		f.add(new GPanel());
 		
 		tf = new JTextField();
 		tf.setLayout(null);
-		tf.setBounds(1, 436, 785, 26);
+		tf.setBounds(2, 436, 782, 24);
+		tf.setBorder(lineBorder);
 		tf.setBackground(Color.LIGHT_GRAY);
 		tf.setFont(new Font("Tahoma", Font.BOLD, 14));
 		tf.setFocusable(true);
@@ -50,28 +43,13 @@ public class LogGUI implements KeyListener {
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		DefaultCaret caret = (DefaultCaret)ta.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		//DefaultCaret caret = (DefaultCaret)ta.getCaret();
+        //caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         
 		f.setVisible(true);
 		
 		Bot.runBot();
 		
-	}
-	
-	public static void setLog(String s) {
-		ta.append(s);
-		System.out.println(s);
-		
-		fileWriter(s);
-	}
-	
-	public static void fileWriter(String s) { 
-		try {
-			AutoRole.log.writeLog(s);
-		} catch (IOException e) {
-			LogGUI.setLog(AutoRole.log.getError(LogGUI.class, e.getMessage()));
-		}
 	}
 
 	@Override
@@ -84,7 +62,7 @@ public class LogGUI implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		//System.out.println(e.getKeyCode());
 		if(e.getKeyCode() == 10) {
-			System.out.println("TF: " + tf.getText());
+			//System.out.println("TF: " + tf.getText());
 			if(tf.getText().equalsIgnoreCase("")) return;
 			
 			if(tf.getText().equalsIgnoreCase("help") || tf.getText().equalsIgnoreCase("?")) {
@@ -96,7 +74,7 @@ public class LogGUI implements KeyListener {
 					CommandBot.conditional(tf);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-					LogGUI.setLog(AutoRole.log.getError(LogGUI.class, e1.getMessage()));
+					GPanel.setLog(AutoRole.log.getError(LogGUI.class, e1.getMessage()));
 				}
 			}
 			tf.setText("");

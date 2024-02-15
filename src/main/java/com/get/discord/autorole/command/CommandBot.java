@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.swing.JTextField;
 
 import com.get.discord.autorole.AutoRole;
-import com.get.discord.autorole.log.LogGUI;
+import com.get.discord.autorole.gui.GPanel;
 
 public class CommandBot {
 
@@ -25,8 +25,8 @@ public class CommandBot {
 	}
 	
 	public static void getHelp() {
-		LogGUI.setLog(AutoRole.log.getInfo("------ Help Bot ------"));
-		LogGUI.setLog(AutoRole.log.getInfo("- bot set MemberJoinRole <role_id>"));
+		GPanel.setLog(AutoRole.log.getInfo("------ Help Bot ------"));
+		GPanel.setLog(AutoRole.log.getInfo("- bot set MemberJoinRole <role_id>"));
 	}
 	
 	private static void setMemberJoinRoleByID(String id) throws IOException {

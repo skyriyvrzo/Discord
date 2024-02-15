@@ -6,7 +6,7 @@ import java.io.IOException;
 import com.get.discord.autorole.AutoRole;
 import com.get.discord.autorole.events.GuildMemberJoinEventListener;
 import com.get.discord.autorole.events.ReadyEventListener;
-import com.get.discord.autorole.log.LogGUI;
+import com.get.discord.autorole.gui.GPanel;
 
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -20,7 +20,7 @@ public class Bot {
 		try {
 			AutoRole.properties.load(new FileReader(AutoRole.directory + "\\config.properties"));
 		} catch (IOException e) {
-			LogGUI.setLog(AutoRole.log.getError(Bot.class, e.getMessage()));
+			GPanel.setLog(AutoRole.log.getError(Bot.class, e.getMessage()));
 		}
 		
 		String botToken = AutoRole.properties.getProperty("tokenID").trim();
