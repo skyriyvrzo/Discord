@@ -15,7 +15,7 @@ import javax.swing.text.DefaultCaret;
 
 import com.get.discord.autorole.AutoRole;
 
-public class GPanel extends JPanel{
+public final class GPanel extends JPanel{
 	
 	/**
 	 * 
@@ -23,7 +23,7 @@ public class GPanel extends JPanel{
 	private static final long serialVersionUID = 104347075198952397L;
 	private static JTextArea ta;
 	
-	public static DefaultCaret caret;
+	private static DefaultCaret caret;
 	
 	public GPanel() {
 		this.setLayout(new BorderLayout());

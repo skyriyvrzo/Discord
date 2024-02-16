@@ -14,12 +14,12 @@ import com.get.discord.autorole.util.CheckVersion;
 import com.get.discord.autorole.util.Reference;
 import com.get.lib.logutils.LogUtil;
 
-public class AutoRole {
+public final class AutoRole {
 
-	public static String directory = "C:\\Users\\"+System.getProperty("user.name")+"\\AppData\\Roaming\\DiscordAutoRole";
-	public static LogUtil log = new LogUtil(directory);
+	public final static String directory = "C:\\Users\\"+System.getProperty("user.name")+"\\AppData\\Roaming\\DiscordAutoRole";
+	public final static LogUtil log = new LogUtil(directory);
 	
-	public static Properties properties = new Properties(); 
+	public final static Properties properties = new Properties(); 
 	
 	public static void main(String[] a) throws IOException {
 				

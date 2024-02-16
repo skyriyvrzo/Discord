@@ -7,9 +7,9 @@ import javax.swing.JTextField;
 import com.get.discord.autorole.AutoRole;
 import com.get.discord.autorole.gui.GPanel;
 
-public class CommandBot {
+public final class CommandBot {
 
-	public static String role_id;
+	//private static String role_id;
 	
 	public static void conditional(JTextField tf) throws IOException {
 		

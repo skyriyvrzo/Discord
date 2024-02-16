@@ -1,6 +1,6 @@
 package com.get.discord.autorole.util;
 
-public class Reference {
+public final class Reference {
 
-	public static final String VERSIONS = "1.2.7";
+	public static final String VERSIONS = "1.2.8";
 }

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import com.get.discord.autorole.AutoRole;
 
-public class CheckVersion {
+public final class CheckVersion {
 
 	public static void changeVersionFile() throws FileNotFoundException, IOException {
 		AutoRole.properties.load(new FileReader(AutoRole.directory + "\\config.properties"));

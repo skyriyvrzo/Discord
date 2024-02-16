@@ -12,9 +12,9 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
-public class Bot {
+public final class Bot {
 	
-	static JDABuilder jda;
+	private static JDABuilder jda;
 	
 	public static void runBot() {
 		try {

@@ -16,9 +16,9 @@ import com.get.discord.autorole.bot.Bot;
 import com.get.discord.autorole.command.CommandBot;
 import com.get.discord.autorole.util.Reference;
 
-public class LogGUI implements KeyListener {
+public final class LogGUI implements KeyListener {
 
-	public JFrame f;
+	private JFrame f;
 	private static JTextField tf;
 	public LogGUI() {
 		Border lineBorder = BorderFactory.createLineBorder(Color.black);

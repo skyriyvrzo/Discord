@@ -9,7 +9,7 @@ import com.get.discord.autorole.gui.GPanel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class GuildMemberJoinEventListener extends ListenerAdapter{
+public final class GuildMemberJoinEventListener extends ListenerAdapter{
 
 	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
