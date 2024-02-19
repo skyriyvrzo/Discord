@@ -43,9 +43,6 @@ public final class LogGUI implements KeyListener {
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//DefaultCaret caret = (DefaultCaret)ta.getCaret();
-        //caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        
 		f.setVisible(true);
 		
 		Bot.runBot();
@@ -76,6 +73,9 @@ public final class LogGUI implements KeyListener {
 					// TODO Auto-generated catch block
 					GPanel.setLog(AutoRole.log.getError(LogGUI.class, e1.getMessage()));
 				}
+			}
+			else {
+				CommandBot.getHelp();
 			}
 			tf.setText("");
 		}

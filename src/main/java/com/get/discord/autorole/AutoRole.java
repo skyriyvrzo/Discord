@@ -17,7 +17,7 @@ import com.get.lib.logutils.LogUtil;
 public final class AutoRole {
 
 	public final static String directory = "C:\\Users\\"+System.getProperty("user.name")+"\\AppData\\Roaming\\DiscordAutoRole";
-	public final static LogUtil log = new LogUtil(directory);
+	public final static LogUtil log = new LogUtil(directory + "//logs");
 	
 	public final static Properties properties = new Properties(); 
 	

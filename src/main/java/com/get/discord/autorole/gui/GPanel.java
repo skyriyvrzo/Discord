@@ -3,7 +3,6 @@ package com.get.discord.autorole.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -36,7 +35,7 @@ public final class GPanel extends JPanel{
 		//ta.setBounds(0, 1, 800, 435);
 		ta.setBackground(Color.WHITE);
 		ta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		ta.setFocusable(true);
+		ta.setFocusable(false);
 		ta.setEditable(false);
 		
 		caret = (DefaultCaret)ta.getCaret();
@@ -56,10 +55,6 @@ public final class GPanel extends JPanel{
 	}
 	
 	public static void fileWriter(String s) { 
-		try {
-			AutoRole.log.writeLog(s);
-		} catch (IOException e) {
-			GPanel.setLog(AutoRole.log.getError(LogGUI.class, e.getMessage()));
-		}
+		AutoRole.log.writeLog(s);
 	}
 }
