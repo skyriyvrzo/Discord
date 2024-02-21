@@ -1,7 +1,10 @@
 package com.get.discord.autorole.command;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,7 +36,7 @@ public final class CommandBot {
 					getSetCMD();
 				}
 				else if(split[2].equalsIgnoreCase("botToken") && split.length == 4) {
-					setBotToken();
+					setBotToken(split[3]);
 				}else if(split[2].equalsIgnoreCase("MemberJoinRole") && split.length == 4){
 					setMemberJoinRoleByID(split[3]);
 				}else {
@@ -64,16 +67,46 @@ public final class CommandBot {
 		GPanel.setLog(AutoRole.log.getInfo("- bot set MemberJoinRole <role_id>"));
 	}
 	
-	private static void getBotToken() {
+	private static void getBotToken() throws FileNotFoundException, IOException {
+		AutoRole.properties.load(new FileReader(AutoRole.directory + "\\config.properties"));
 		
+		String botToken = AutoRole.properties.getProperty("tokenID");
+		
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(botToken), null);
+		GPanel.setLog(AutoRole.log.getInfo("Bot Token: " + botToken));
+		GPanel.setLog(AutoRole.log.getInfo("Copied to clipboard"));
 	}
 	
-	private static void getMemberJoinRoleID() {
+	private static void getMemberJoinRoleID() throws FileNotFoundException, IOException {
+		AutoRole.properties.load(new FileReader(AutoRole.directory + "\\config.properties"));
+		String memberJoinRoleID = AutoRole.properties.getProperty("roleID");
 		
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(memberJoinRoleID), null);
+		GPanel.setLog(AutoRole.log.getInfo("RoleID: " + memberJoinRoleID));
+		GPanel.setLog(AutoRole.log.getInfo("Copied to clipboard"));
 	}
 	
-	private static void setBotToken() {
+	private static void setBotToken(String id) throws FileNotFoundException, IOException {
+		AutoRole.properties.load(new FileReader(AutoRole.directory + "\\config.properties"));
+		String oldtokenID = AutoRole.properties.getProperty("tokenID");
 		
+		BufferedReader reader = new BufferedReader(new FileReader(AutoRole.directory + "\\config.properties"));
+		StringBuilder builder = new StringBuilder();
+		String line;
+		
+		while((line = reader.readLine()) != null) {
+			line = line.replace(oldtokenID, id);
+			builder.append(line).append(System.lineSeparator());
+		}
+		
+		reader.close();
+		
+		BufferedWriter writer = new BufferedWriter(new FileWriter(AutoRole.directory + "\\config.properties"));
+		writer.write(builder.toString());
+		
+		writer.close();
+		
+		GPanel.setLog(AutoRole.log.getWarning("Please restart program."));
 	}
 	
 	private static void setMemberJoinRoleByID(String id) throws IOException {
