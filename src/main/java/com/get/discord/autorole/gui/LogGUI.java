@@ -20,6 +20,8 @@ public final class LogGUI implements KeyListener {
 
 	private JFrame f;
 	private static JTextField tf;
+	private static String split[];
+	
 	public LogGUI() {
 		Border lineBorder = BorderFactory.createLineBorder(Color.black);
 		f = new JFrame("[Discord] AutoRole (" + Reference.VERSIONS + ")" + "     For help, type\"help\" or \"?\"");
@@ -60,6 +62,7 @@ public final class LogGUI implements KeyListener {
 		//System.out.println(e.getKeyCode());
 		if(e.getKeyCode() == 10) {
 			//System.out.println("TF: " + tf.getText());
+			split = tf.getText().split(" ");
 			if(tf.getText().equalsIgnoreCase("")) return;
 			
 			if(tf.getText().equalsIgnoreCase("help") || tf.getText().equalsIgnoreCase("?")) {
@@ -68,7 +71,7 @@ public final class LogGUI implements KeyListener {
 			else if(tf.getText().contains("bot")) {
 				try {
 					System.out.println("run conditional");
-					CommandBot.conditional(tf);
+					CommandBot.conditional(tf, split);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					GPanel.setLog(AutoRole.log.getError(LogGUI.class, e1.getMessage()));

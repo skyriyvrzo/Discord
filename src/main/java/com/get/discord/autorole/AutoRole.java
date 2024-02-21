@@ -1,14 +1,10 @@
 package com.get.discord.autorole;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.get.discord.autorole.gui.GPanel;
 import com.get.discord.autorole.gui.LogGUI;
 import com.get.discord.autorole.util.CheckVersion;
 import com.get.discord.autorole.util.Reference;
@@ -18,7 +14,6 @@ public final class AutoRole {
 
 	public final static String directory = "C:\\Users\\"+System.getProperty("user.name")+"\\AppData\\Roaming\\DiscordAutoRole";
 	public final static LogUtil log = new LogUtil(directory + "//logs");
-	
 	public final static Properties properties = new Properties(); 
 	
 	public static void main(String[] a) throws IOException {
@@ -41,29 +36,5 @@ public final class AutoRole {
 		
 		log.mkdir();
 		new LogGUI();
-	}
-	
-	public static void setRoleID(String id) throws IOException {
-		properties.load(new FileReader(directory + "\\config.properties"));
-		String oldRoleID = properties.getProperty("roleID");
-		
-		BufferedReader reader = new BufferedReader(new FileReader(directory + "\\config.properties"));
-		StringBuilder builder = new StringBuilder();
-		String line;
-		
-		while((line = reader.readLine()) != null) {
-			line = line.replace(oldRoleID, id);
-			builder.append(line).append(System.lineSeparator());
-		}
-		
-		reader.close();
-		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(directory + "\\config.properties"));
-		writer.write(builder.toString());
-		
-		writer.close();
-		
-		GPanel.setLog(AutoRole.log.getWarning("Please restart program."));
-		//Bot.buildBot();
 	}
 }
