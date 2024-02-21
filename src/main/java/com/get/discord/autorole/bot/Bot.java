@@ -23,7 +23,7 @@ public final class Bot {
 			GPanel.setLog(AutoRole.log.getError(Bot.class, e.getMessage()));
 		}
 		
-		String botToken = AutoRole.properties.getProperty("tokenID").trim();
+		String botToken = (AutoRole.properties.getProperty("tokenID").trim() != null) ? AutoRole.properties.getProperty("tokenID").trim() : "";
 		
 		System.out.println(botToken);
 		jda = JDABuilder.createDefault(botToken);
