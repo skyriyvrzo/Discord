@@ -1,20 +1,22 @@
-package com.get.discord.autorole.gui;
+package com.get.discord.gg.gui;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import com.get.discord.autorole.AutoRole;
-import com.get.discord.autorole.bot.Bot;
-import com.get.discord.autorole.command.CommandBot;
-import com.get.discord.autorole.util.Reference;
+import com.get.discord.gg.Main;
+import com.get.discord.gg.bot.JavaDiscordAPI;
+import com.get.discord.gg.command.CommandBot;
+import com.get.discord.gg.util.Reference;
 
 public final class LogGUI implements KeyListener {
 
@@ -22,9 +24,12 @@ public final class LogGUI implements KeyListener {
 	private static JTextField tf;
 	private static String split[];
 	
+	private ArrayList<String> commandList = new ArrayList<String>();
+	private static int command_location = 0;
+	
 	public LogGUI() {
 		Border lineBorder = BorderFactory.createLineBorder(Color.black);
-		f = new JFrame("[Discord] AutoRole (" + Reference.VERSIONS + ")" + "     For help, type\"help\" or \"?\"");
+		f = new JFrame("[Discord] " + Reference.VERSIONS);
 		f.setSize(802, 501);
 		f.setLayout(null);
 		f.setFocusable(false);
@@ -45,9 +50,12 @@ public final class LogGUI implements KeyListener {
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		ImageIcon icon = new ImageIcon(Reference.getImagesFolder.get() + "4909.jpg");
+		f.setIconImage(icon.getImage());
+		
 		f.setVisible(true);
 		
-		Bot.runBot();
+		JavaDiscordAPI.runBot();
 		
 	}
 
@@ -65,6 +73,16 @@ public final class LogGUI implements KeyListener {
 			split = tf.getText().split(" ");
 			if(tf.getText().equalsIgnoreCase("")) return;
 			
+			if(commandList.size() != 0) {
+				if(!(tf.getText().equalsIgnoreCase(commandList.get(commandList.size() - 1)))) {
+					commandList.add(tf.getText());
+					command_location = commandList.size();
+				}
+			}else {
+				commandList.add(tf.getText());
+				command_location = commandList.size();
+			}
+			
 			if(tf.getText().equalsIgnoreCase("help") || tf.getText().equalsIgnoreCase("?")) {
 				CommandBot.getHelp();
 			}
@@ -74,13 +92,35 @@ public final class LogGUI implements KeyListener {
 					CommandBot.conditional(tf, split);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-					GPanel.setLog(AutoRole.log.getError(LogGUI.class, e1.getMessage()));
+					GPanel.setLog(Main.log.getError(LogGUI.class, e1.getMessage()));
 				}
 			}
 			else {
 				CommandBot.getHelp();
 			}
 			tf.setText("");
+		}
+		
+		else if(e.getKeyCode() == 38) {
+			if(tf.getText().equalsIgnoreCase("")) command_location = commandList.size();
+			
+			try {
+				tf.setText(commandList.get(--command_location));
+			}
+			catch(Exception e1) {
+				tf.setText(commandList.get(++command_location));
+			}
+		}
+		else if(e.getKeyCode() == 40) {
+			if(tf.getText().equalsIgnoreCase("")) return;
+			
+			try {
+				tf.setText(commandList.get(++command_location));
+			}
+			catch(Exception e1) {
+				command_location = commandList.size();
+				tf.setText("");
+			}
 		}
 	}
 

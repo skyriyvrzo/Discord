@@ -10,5 +10,11 @@
     	<artifactId>JDA</artifactId>
     	<version>5.0.0-beta.20</version>
     </dependency>
+    
+    <dependency>
+    	<groupId>com.discord4j</groupId>
+    	<artifactId>discord4j-core</artifactId>
+    	<version>3.2.5</version>
+  	  </dependency>
   </dependencies>
 </project>

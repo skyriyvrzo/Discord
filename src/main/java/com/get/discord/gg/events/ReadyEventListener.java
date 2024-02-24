@@ -1,7 +1,7 @@
-package com.get.discord.autorole.events;
+package com.get.discord.gg.events;
 
-import com.get.discord.autorole.AutoRole;
-import com.get.discord.autorole.gui.GPanel;
+import com.get.discord.gg.Main;
+import com.get.discord.gg.gui.GPanel;
 
 import net.dv8tion.jda.api.events.GatewayPingEvent;
 import net.dv8tion.jda.api.events.GenericEvent;
@@ -14,12 +14,12 @@ public final class ReadyEventListener implements EventListener{
 	public void onEvent(GenericEvent event) {
 		if(!(event instanceof GatewayPingEvent)) {
 			System.out.println(event);
-			GPanel.setLog(AutoRole.log.getInfo(event.toString()));
+			GPanel.setLog(Main.log.getInfo(event.toString()));
 			
 			if(event instanceof ReadyEvent) {
 				System.out.println("bot is now online.");
-				GPanel.setLog(AutoRole.log.getEvent(event.toString(), "bot is now online."));
-				GPanel.setLog(AutoRole.log.getInfo("For help, type\"help\" or \"?\""));
+				//GPanel.setLog(Main.log.getEvent(event.toString(), "bot is now online."));
+				//GPanel.setLog(Main.log.getInfo("For help, type \"help\" or \"?\""));
 			}
 		}
 	}

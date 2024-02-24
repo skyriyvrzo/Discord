@@ -1,4 +1,4 @@
-package com.get.discord.autorole.gui;
+package com.get.discord.gg.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,7 +12,7 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
-import com.get.discord.autorole.AutoRole;
+import com.get.discord.gg.Main;
 
 public final class GPanel extends JPanel{
 	
@@ -46,7 +46,7 @@ public final class GPanel extends JPanel{
 		JScrollPane scrollPane = new JScrollPane(ta);
 		this.add(scrollPane);
 	}
-	
+
 	public static void setLog(String s) {
 		ta.append(s);
 		System.out.println(s);
@@ -55,6 +55,6 @@ public final class GPanel extends JPanel{
 	}
 	
 	public static void fileWriter(String s) { 
-		AutoRole.log.writeLog(s);
+		Main.log.writeLog(s);
 	}
 }
