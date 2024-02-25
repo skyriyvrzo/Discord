@@ -61,7 +61,7 @@ public class Discord4J {
 			}).then();
 			
 			Mono<Void> voiceJoinEvent = gateway.on(VoiceStateUpdateEvent.class, event -> {
-				System.out.println("Voice State Update Event [Join]");
+				//System.out.println("Voice State Update Event [Join]");
 				GPanel.setLog(Main.log.getInfo(String.valueOf(event)));
 				userID = event.getCurrent().getUserId();
 				VoiceState voiceState = event.getCurrent();
@@ -69,16 +69,16 @@ public class Discord4J {
 				globalName = voiceState.getData().member().get().user().globalName().isEmpty() ? Optional.ofNullable("Room " + random.nextInt(100) + ((char) (random.nextInt(26) + 65))) : voiceState.getData().member().get().user().globalName();
 				guildID = voiceState.getGuildId();
 				
-				System.out.println("Global Name: " + globalName);
-				System.out.println(guildID);
+				//System.out.println("Global Name: " + globalName);
+				//System.out.println(guildID);
 				
 				Mono<Guild> guildMono = event.getClient().getGuildById(guildID);
-				System.out.println(guildMono);
-				System.out.println("User ID: " + voiceState.getData().member().get().user().id() + "\n" + "Global Name: " + globalName.get());
+				//System.out.println(guildMono);
+				//System.out.println("User ID: " + voiceState.getData().member().get().user().id() + "\n" + "Global Name: " + globalName.get());
 				
-				System.out.println("Voice State: " + voiceState);
-				System.out.println("is Bot: " + voiceState.getData().member().get().user().bot());
-				System.out.println("is Empty: " + (voiceState.getData().channelId().isEmpty()));
+				//System.out.println("Voice State: " + voiceState);
+				//System.out.println("is Bot: " + voiceState.getData().member().get().user().bot());
+				//System.out.println("is Empty: " + (voiceState.getData().channelId().isEmpty()));
 				
 				if(voiceState.getData().channelId().isEmpty() == false) {
 					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(Main.properties.getProperty("channelIdforCreateRoom"))) {
@@ -103,25 +103,25 @@ public class Discord4J {
 			
 			Flux<Void> voiceChannelCreateEvent = gateway.on(VoiceChannelCreateEvent.class, event -> {
 				GPanel.setLog(Main.log.getInfo(String.valueOf(event)));
-			    System.out.println("Voice Create Event");
+			    //System.out.println("Voice Create Event");
 			    
 			    Snowflake voiceChannelID = event.getChannel().getId();
-			    System.out.println("Channel ID: " + voiceChannelID.asLong());
+			    //System.out.println("Channel ID: " + voiceChannelID.asLong());
 			    
 			    Mono<Guild> guildMono = event.getClient().getGuildById(guildID);
-			    System.out.println(guildMono);
+			    //System.out.println(guildMono);
 
 			    return guildMono.flatMap(guild -> {
 			        System.out.println("Step 0");
 			        Mono<Member> memberMono = guild.getMemberById(userID);
-			        System.out.println("Step 1");
+			        //System.out.println("Step 1");
 
 			        return memberMono.flatMap(member -> {
 			            Mono<VoiceChannel> targetChannelMono = guild.getChannelById(voiceChannelID).ofType(VoiceChannel.class);
-			            System.err.println("Step 2");
+			            //System.err.println("Step 2");
 
 			            return targetChannelMono.flatMap(targetChannel -> {
-			                System.out.println("Step 3");
+			                //System.out.println("Step 3");
 			                return member.edit(spec -> spec.setNewVoiceChannel(targetChannel.getId())).then();
 			            });
 			        });
@@ -131,7 +131,7 @@ public class Discord4J {
 			Flux<Void> voiceStateUpdateEvent = gateway.on(VoiceStateUpdateEvent.class, event -> {
 				GPanel.setLog(Main.log.getInfo(String.valueOf(event)));
 				
-				System.out.println("Voice State Update Event");
+				//System.out.println("Voice State Update Event");
 				
 			    Optional<Snowflake> channelIdBefore = event.getOld().map(VoiceState::getChannelId).orElse(null);
 			    
