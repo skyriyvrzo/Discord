@@ -2,6 +2,7 @@ package com.get.discord.gg.bot;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
@@ -60,20 +61,24 @@ public class Discord4J {
 			}).then();
 			
 			Mono<Void> voiceJoinEvent = gateway.on(VoiceStateUpdateEvent.class, event -> {
+				System.out.println("Voice State Update Event [Join]");
 				GPanel.setLog(Main.log.getInfo(String.valueOf(event)));
 				userID = event.getCurrent().getUserId();
 				VoiceState voiceState = event.getCurrent();
-				globalName = voiceState.getData().member().get().user().globalName();
+				Random random = new Random();
+				globalName = voiceState.getData().member().get().user().globalName().isEmpty() ? Optional.ofNullable("Room " + random.nextInt(100) + ((char) (random.nextInt(26) + 65))) : voiceState.getData().member().get().user().globalName();
 				guildID = voiceState.getGuildId();
-				Mono<Guild> guildMono = event.getClient().getGuildById(guildID);
 				
+				System.out.println("Global Name: " + globalName);
+				System.out.println(guildID);
+				
+				Mono<Guild> guildMono = event.getClient().getGuildById(guildID);
+				System.out.println(guildMono);
 				System.out.println("User ID: " + voiceState.getData().member().get().user().id() + "\n" + "Global Name: " + globalName.get());
 				
-				/*if(gateway != null) {
-					System.out.println("Voice State: " + voiceState);
-					System.out.println("is Bot: " + voiceState.getData().member().get().user().bot());
-					System.out.println("is Empty: " + (voiceState.getData().channelId().isEmpty()));
-				}*/
+				System.out.println("Voice State: " + voiceState);
+				System.out.println("is Bot: " + voiceState.getData().member().get().user().bot());
+				System.out.println("is Empty: " + (voiceState.getData().channelId().isEmpty()));
 				
 				if(voiceState.getData().channelId().isEmpty() == false) {
 					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(Main.properties.getProperty("channelIdforCreateRoom"))) {
