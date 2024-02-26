@@ -50,7 +50,7 @@ public final class LogGUI implements KeyListener {
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		ImageIcon icon = new ImageIcon(Reference.getImagesFolder.get() + "4909.jpg");
+		ImageIcon icon = new ImageIcon(Reference.getImagesFolder.get() + "discord.png");
 		f.setIconImage(icon.getImage());
 		
 		f.setVisible(true);

@@ -6,7 +6,7 @@ import com.get.discord.gg.Main;
 
 public final class Reference {
 
-	public static final String VERSIONS = "1.3.2";
+	public static final String VERSIONS = "1.4";
 	
 	public static Supplier<String> getDirectory = () -> Main.directory;
 	public static Supplier<String> getClassPath = () -> Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
