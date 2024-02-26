@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
+import com.get.discord.gg.util.Reference;
 
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -18,7 +19,7 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		GPanel.setLog(Main.log.getEvent(event.toString(), event.getMember().toString()));
 		
 		try {
-			Main.properties.load(new FileReader(Main.directory + "\\config.properties"));
+			Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		} catch (IOException e) {
 			GPanel.setLog(Main.log.getError(GuildMemberJoinEventListener.class, e.getMessage()));
 		}

@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
+import com.get.discord.gg.util.Reference;
 
 public final class CommandBot {
 
@@ -125,10 +126,10 @@ public final class CommandBot {
 	}
 	
 	private static void setBotToken(String id) throws FileNotFoundException, IOException {
-		Main.properties.load(new FileReader(Main.directory + "\\config.properties"));
+		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		String oldtokenID = Main.properties.getProperty("tokenId");
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Main.directory + "\\config.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -139,7 +140,7 @@ public final class CommandBot {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Main.directory + "\\config.properties"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();
@@ -148,10 +149,10 @@ public final class CommandBot {
 	}
 	
 	private static void setMemberJoinRoleByID(String id) throws IOException {
-		Main.properties.load(new FileReader(Main.directory + "\\config.properties"));
+		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		String oldRoleID = Main.properties.getProperty("roleId");
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Main.directory + "\\config.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -162,7 +163,7 @@ public final class CommandBot {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Main.directory + "\\config.properties"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();
@@ -172,10 +173,10 @@ public final class CommandBot {
 	}
 	
 	private static void setChannelIDforCreateRoom(String id) throws FileNotFoundException, IOException {
-		Main.properties.load(new FileReader(Main.directory + "\\config.properties"));
+		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		String oldRoleID = Main.properties.getProperty("channelIdforCreateRoom");
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Main.directory + "\\config.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -186,7 +187,7 @@ public final class CommandBot {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Main.directory + "\\config.properties"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();
@@ -195,10 +196,10 @@ public final class CommandBot {
 	}
 	
 	private static void setCategoryIdforNewRoom(String id) throws FileNotFoundException, IOException {
-		Main.properties.load(new FileReader(Main.directory + "\\config.properties"));
+		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		String oldRoleID = Main.properties.getProperty("categoryIdforNewRoom");
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Main.directory + "\\config.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -209,7 +210,7 @@ public final class CommandBot {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Main.directory + "\\config.properties"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();

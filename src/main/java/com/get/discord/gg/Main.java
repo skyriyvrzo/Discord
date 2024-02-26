@@ -6,26 +6,29 @@ import java.io.IOException;
 import java.util.Properties;
 
 import com.get.discord.gg.gui.LogGUI;
+import com.get.discord.gg.util.CheckOS;
 import com.get.discord.gg.util.CheckVersion;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.UnpackAssets;
-import com.get.lib.logutils.LogUtil;
 
 public final class Main {
 
-	public final static String directory = "C:\\Users\\"+System.getProperty("user.name")+"\\AppData\\Roaming\\DiscordBot";
-	public final static LogUtil log = new LogUtil(directory + "//logs");
+	public static com.get.lib.logutils.LogUtil log = new com.get.lib.logutils.LogUtil();
 	public final static Properties properties = new Properties(); 
 	
 	public static void main(String[] a) throws IOException {
-				
-		File dir = new File(directory);
+		
+		CheckOS.checkOperatingSystem();
+		
+		log = new com.get.lib.logutils.LogUtil(Reference.getDirectory.get());
+		
+		File dir = new File(Reference.getDirectory.get());
 		dir.mkdir();
 		
-		File config = new File(directory + "\\config.properties");
+		File config = new File(Reference.getConfigFile.get());
 		if(config.exists());
     	else {
-    		FileWriter writer = new FileWriter(directory + "\\config.properties", true);
+    		FileWriter writer = new FileWriter(Reference.getConfigFile.get(), true);
     		
     		writer.write("version: "+Reference.VERSIONS +"\n");
     		writer.write("tokenId: {token}\n");

@@ -12,11 +12,11 @@ import com.get.discord.gg.Main;
 public final class CheckVersion {
 
 	public static void changeVersionFile() throws FileNotFoundException, IOException {
-		Main.properties.load(new FileReader(Main.directory + "\\config.properties"));
+		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		String configFileVersion = Main.properties.getProperty("version");
 		String currentVersion = Reference.VERSIONS;
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Main.directory + "\\config.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -27,7 +27,7 @@ public final class CheckVersion {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Main.directory + "\\config.properties"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();

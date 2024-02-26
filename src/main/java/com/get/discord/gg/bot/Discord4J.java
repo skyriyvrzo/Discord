@@ -23,7 +23,7 @@ import discord4j.core.object.entity.channel.VoiceChannel;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class Discord4J {
+public final class Discord4J {
 
 	private static Snowflake userID;
 	private static Optional<String> globalName;
