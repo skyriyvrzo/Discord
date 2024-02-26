@@ -16,7 +16,7 @@ public class UnpackAssets {
 				
 		try {
 			@SuppressWarnings("resource")
-			JarFile jarfile = new JarFile(new File(Reference.getClassPath.get()).getCanonicalPath() + "\\Discord-" + Reference.VERSIONS + ".jar");
+			JarFile jarfile = new JarFile(Reference.getJarPath.get());
 			Enumeration<JarEntry> enu = jarfile.entries();
 		
 			while(enu.hasMoreElements()) {
