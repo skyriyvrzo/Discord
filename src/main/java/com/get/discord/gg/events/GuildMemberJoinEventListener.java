@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
 import com.get.discord.gg.util.Reference;
+import com.get.discord.gg.util.Utils;
 
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -15,6 +16,8 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 	@Override
 	public void onGuildMemberJoin(GuildMemberJoinEvent event) {
 		super.onGuildMemberJoin(event);
+		Utils.loadProperties();
+		
 		System.out.println(event);
 		GPanel.setLog(Main.log.getEvent(event.toString(), event.getMember().toString()));
 		
@@ -23,6 +26,7 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		} catch (IOException e) {
 			GPanel.setLog(Main.log.getError(GuildMemberJoinEventListener.class, e.getMessage()));
 		}
+		
 		String roldID = Main.properties.getProperty("roleID");
 		
 		try {
@@ -30,7 +34,5 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		}catch(Exception e) {
 			GPanel.setLog(Main.log.getError(GuildMemberJoinEventListener.class, e.getMessage()));
 		}
-		
 	}
-	
 }

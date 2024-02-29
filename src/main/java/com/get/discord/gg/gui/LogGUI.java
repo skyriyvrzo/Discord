@@ -27,7 +27,7 @@ public final class LogGUI implements KeyListener {
 	private ArrayList<String> commandList = new ArrayList<String>();
 	private static int command_location = 0;
 	
-	public LogGUI() {
+	public LogGUI() throws IOException {
 		Border lineBorder = BorderFactory.createLineBorder(Color.black);
 		f = new JFrame("[Discord] " + Reference.VERSIONS);
 		f.setSize(802, 501);
@@ -55,8 +55,9 @@ public final class LogGUI implements KeyListener {
 		
 		f.setVisible(true);
 		
-		JavaDiscordAPI.runBot();
+		Main.github.showOptionDialog();
 		
+		JavaDiscordAPI.runBot();
 	}
 
 	@Override

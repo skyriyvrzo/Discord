@@ -10,17 +10,20 @@ import com.get.discord.gg.util.CheckOS;
 import com.get.discord.gg.util.CheckVersion;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.UnpackAssets;
+import com.get.lib.github.Github;
+import com.get.lib.logutils.LogUtil;
 
 public final class Main {
 
-	public static com.get.lib.logutils.LogUtil log = new com.get.lib.logutils.LogUtil();
 	public final static Properties properties = new Properties(); 
+	public static LogUtil log;
+	public static Github github = new Github("skyriyvrzo", "Discord", Reference.VERSIONS);
 	
 	public static void main(String[] a) throws IOException {
 		
 		CheckOS.checkOperatingSystem();
 		
-		log = new com.get.lib.logutils.LogUtil(Reference.getDirectory.get());
+		log = new LogUtil(Reference.getDirectory.get());
 		
 		File dir = new File(Reference.getDirectory.get());
 		dir.mkdir();
@@ -36,8 +39,7 @@ public final class Main {
     		writer.write("channelIdforCreateRoom: {channel_id}\n");
     		writer.write("categoryIdforNewRoom: {category_id}");
     		writer.close();
-    	}
-		
+    	}		
 		CheckVersion.changeVersionFile();
 		UnpackAssets.extractFile();
 		

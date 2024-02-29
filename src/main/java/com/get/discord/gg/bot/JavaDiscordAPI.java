@@ -10,7 +10,8 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public final class JavaDiscordAPI {
 	
-	private static JDABuilder jda;
+	public static JDABuilder jda;
+	public static Discord4J discord4j;
 	
 	public static void runBot() {
 		
@@ -26,10 +27,11 @@ public final class JavaDiscordAPI {
 		.addEventListeners(new GuildMemberJoinEventListener())
 		.build();
 		
-		new com.get.discord.gg.bot.Discord4J();
+		discord4j = new com.get.discord.gg.bot.Discord4J();
 	}
 	
 	public static void buildBot() {
 		jda.build();
+		discord4j.client.login().block();
 	}
 }

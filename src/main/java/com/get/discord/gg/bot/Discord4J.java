@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
+import com.get.discord.gg.util.Utils;
 
 import discord4j.common.util.Snowflake;
 import discord4j.core.DiscordClient;
@@ -29,10 +30,11 @@ public final class Discord4J {
 	private static Optional<String> globalName;
 	private static Snowflake guildID;
 	private static ArrayList<Snowflake> voiceChannelIDList = new ArrayList<>();
+	public DiscordClient client;
 	
 	public Discord4J() {
-		
-		DiscordClient client = DiscordClient.create((Main.properties.getProperty("tokenId") != null) ? Main.properties.getProperty("tokenId").trim() : "");
+		Utils.loadProperties();
+		client = DiscordClient.create((Main.properties.getProperty("tokenId") != null) ? Main.properties.getProperty("tokenId").trim() : "");
 		
 		@SuppressWarnings("deprecation")
 		Mono<Void> login = client.withGateway((GatewayDiscordClient gateway) -> {
@@ -81,6 +83,7 @@ public final class Discord4J {
 				//System.out.println("is Empty: " + (voiceState.getData().channelId().isEmpty()));
 				
 				if(voiceState.getData().channelId().isEmpty() == false) {
+					Utils.loadProperties();
 					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(Main.properties.getProperty("channelIdforCreateRoom"))) {
 					guildMono.flatMap(guild -> {
 							return guild.createVoiceChannel(spec -> {

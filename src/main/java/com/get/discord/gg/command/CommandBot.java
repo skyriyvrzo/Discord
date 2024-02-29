@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
 import com.get.discord.gg.util.Reference;
+import com.get.discord.gg.util.Utils;
 
 public final class CommandBot {
 
@@ -47,7 +48,7 @@ public final class CommandBot {
 				else if(split[2].equalsIgnoreCase("botToken") && split.length == 4) {
 					setBotToken(split[3]);
 				}
-				else if(split[2].equalsIgnoreCase("memberJoinRole") && split.length == 4){
+				else if(split[2].equalsIgnoreCase("memberJoinRoleId") && split.length == 4){
 					setMemberJoinRoleByID(split[3]);
 				}
 				else if(split[2].equalsIgnoreCase("channelIdforCreateRoom") && split.length == 4) {
@@ -102,6 +103,7 @@ public final class CommandBot {
 	}
 	
 	private static void getMemberJoinRoleID() throws FileNotFoundException, IOException {
+		Utils.loadProperties();
 		String memberJoinRoleID = Main.properties.getProperty("roleId");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(memberJoinRoleID), null);
@@ -110,6 +112,7 @@ public final class CommandBot {
 	}
 	
 	private static void getChannelIdforCreateRoom() {
+		Utils.loadProperties();
 		String channelIdforCreateRoom = Main.properties.getProperty("channelIdforCreateRoom");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(channelIdforCreateRoom), null);
@@ -118,6 +121,7 @@ public final class CommandBot {
 	}
 	
 	private static void getCategoryIdforNewRoom() {
+		Utils.loadProperties();
 		String categoryIdforNewRoom = Main.properties.getProperty("categoryIdforNewRoom");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(categoryIdforNewRoom), null);
@@ -126,7 +130,7 @@ public final class CommandBot {
 	}
 	
 	private static void setBotToken(String id) throws FileNotFoundException, IOException {
-		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
+		Utils.loadProperties();
 		String oldtokenID = Main.properties.getProperty("tokenId");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
@@ -149,7 +153,7 @@ public final class CommandBot {
 	}
 	
 	private static void setMemberJoinRoleByID(String id) throws IOException {
-		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
+		Utils.loadProperties();
 		String oldRoleID = Main.properties.getProperty("roleId");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
@@ -173,7 +177,7 @@ public final class CommandBot {
 	}
 	
 	private static void setChannelIDforCreateRoom(String id) throws FileNotFoundException, IOException {
-		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
+		Utils.loadProperties();
 		String oldRoleID = Main.properties.getProperty("channelIdforCreateRoom");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
@@ -196,7 +200,7 @@ public final class CommandBot {
 	}
 	
 	private static void setCategoryIdforNewRoom(String id) throws FileNotFoundException, IOException {
-		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
+		Utils.loadProperties();
 		String oldRoleID = Main.properties.getProperty("categoryIdforNewRoom");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
