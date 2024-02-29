@@ -18,7 +18,6 @@ public final class Main {
 	public static Github github = new Github("skyriyvrzo", "Discord", Reference.VERSIONS);
 	
 	public static void main(String[] a) throws IOException {
-		
 		CheckOS.checkOperatingSystem();
 		
 		log = new LogUtil(Reference.getDirectory.get());
