@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
+import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
 
 import discord4j.common.util.Snowflake;
@@ -57,6 +58,9 @@ public final class Discord4J {
 				}
 				else if(message.getContent().equalsIgnoreCase("myuserdata")) {
 					return message.getChannel().flatMap(channel -> channel.createMessage(String.valueOf(user.get().getUserData())));
+				}
+				else if(message.getContent().equalsIgnoreCase("bot version")) {
+					return message.getChannel().flatMap(channel -> channel.createMessage(Reference.VERSIONS));
 				}
 				
 				return Mono.empty();
