@@ -17,6 +17,7 @@ import com.get.discord.gg.Main;
 import com.get.discord.gg.bot.JavaDiscordAPI;
 import com.get.discord.gg.command.CommandBot;
 import com.get.discord.gg.util.Reference;
+import com.get.lib.logutils.LogUtil;
 
 public final class LogGUI implements KeyListener {
 
@@ -93,7 +94,7 @@ public final class LogGUI implements KeyListener {
 					CommandBot.conditional(tf, split);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-					GPanel.setLog(Main.log.getError(LogGUI.class, e1.getMessage()));
+					GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), LogGUI.class.getSimpleName(), e, false));
 				}
 			}
 			else {

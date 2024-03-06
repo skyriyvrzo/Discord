@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.get.discord.gg.Main;
 import com.get.discord.gg.command.CommandBot;
 import com.get.discord.gg.gui.GPanel;
+import com.get.lib.logutils.LogUtil;
 
 public final class Utils {
 
@@ -13,7 +14,7 @@ public final class Utils {
 		try {
 			Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		} catch (IOException e) {
-			GPanel.setLog(Main.log.getError(CommandBot.class, e.getMessage()));
+			GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), CommandBot.class.getSimpleName(), e.getMessage(), false));
 		}
 	}
 }

@@ -49,7 +49,7 @@ public final class GPanel extends JPanel{
 
 	public static void setLog(String s) {
 		ta.append(s);
-		System.out.println(s);
+		//System.out.println(s);
 		
 		fileWriter(s);
 	}

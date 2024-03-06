@@ -8,6 +8,7 @@ import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
+import com.get.lib.logutils.LogUtil;
 
 import discord4j.common.util.Snowflake;
 import discord4j.core.DiscordClient;
@@ -42,9 +43,9 @@ public final class Discord4J {
 			Mono<Void> printOnLogin = gateway.on(ReadyEvent.class, event ->
 				Mono.fromRunnable(() -> {
 					final User seft = event.getSelf();
-					GPanel.setLog(Main.log.getDiscord(String.format("Logged in as %s#%s", seft.getUsername(), seft.getDiscriminator())));
-					GPanel.setLog(Main.log.getDiscord("bot is now online."));
-					GPanel.setLog(Main.log.getInfo("For help, type \"help\" or \"?\""));
+					GPanel.setLog(LogUtil.discord("Server thread", Discord4J.class.getSimpleName(), String.format("Logged in as %s#%s", seft.getUsername(), seft.getDiscriminator()), false));
+					GPanel.setLog(LogUtil.discord("Server thread", Discord4J.class.getSimpleName(), "bot is now online.", false));
+					GPanel.setLog(LogUtil.info("Help", Discord4J.class.getSimpleName(), "For help, type \"help\" or \"?\"", false));
 				}))
 				.then();
 			
@@ -53,13 +54,13 @@ public final class Discord4J {
 				Optional<User> user = event.getMessage().getAuthor();
 				
 				if(message.getContent().equalsIgnoreCase("hi bot")) {
-					System.out.println(message.getContent());
+					//System.out.println(message.getContent());
 					return message.getChannel().flatMap(channel -> channel.createMessage("Hi " + user.get().getGlobalName().get()));
 				}
 				else if(message.getContent().equalsIgnoreCase("myuserdata")) {
 					return message.getChannel().flatMap(channel -> channel.createMessage(String.valueOf(user.get().getUserData())));
 				}
-				else if(message.getContent().equalsIgnoreCase("bot version")) {
+				else if(message.getContent().equalsIgnoreCase("bot version") || message.getContent().equalsIgnoreCase("() -> bver")) {
 					return message.getChannel().flatMap(channel -> channel.createMessage(Reference.VERSIONS));
 				}
 				
@@ -68,7 +69,7 @@ public final class Discord4J {
 			
 			Mono<Void> voiceJoinEvent = gateway.on(VoiceStateUpdateEvent.class, event -> {
 				//System.out.println("Voice State Update Event [Join]");
-				GPanel.setLog(Main.log.getInfo(String.valueOf(event)));
+				//GPanel.setLog(LogUtil.info("Server thread", Discord4J.class.getSimpleName(), String.valueOf(event), false));
 				userID = event.getCurrent().getUserId();
 				VoiceState voiceState = event.getCurrent();
 				Random random = new Random();
@@ -95,8 +96,8 @@ public final class Discord4J {
 							spec.setName(globalName.get());
 						});
 					  }).subscribe(voiceChannel -> {
-						System.out.println("Voice channel created: " + voiceChannel.getName() + ":" + voiceChannel.getId());
-						
+						//System.out.println("Voice channel created: " + voiceChannel.getName() + ":" + voiceChannel.getId());
+						GPanel.setLog(LogUtil.event(Discord4J.class.getSimpleName(), "channel-create", "channel: " + voiceChannel.getName() + ":" + voiceChannel.getId().asString() + " has been created", false));
 						if(!voiceChannelIDList.contains(voiceChannel.getId())) {
 							voiceChannelIDList.add(voiceChannel.getId());
 						}	
@@ -109,7 +110,7 @@ public final class Discord4J {
 			}).then();
 			
 			Flux<Void> voiceChannelCreateEvent = gateway.on(VoiceChannelCreateEvent.class, event -> {
-				GPanel.setLog(Main.log.getInfo(String.valueOf(event)));
+				//GPanel.setLog(LogUtil.info("Server thread", Discord4J.class.getSimpleName(), String.valueOf(event), false));
 			    //System.out.println("Voice Create Event");
 			    
 			    Snowflake voiceChannelID = event.getChannel().getId();
@@ -119,7 +120,7 @@ public final class Discord4J {
 			    //System.out.println(guildMono);
 
 			    return guildMono.flatMap(guild -> {
-			        System.out.println("Step 0");
+			        //System.out.println("Step 0");
 			        Mono<Member> memberMono = guild.getMemberById(userID);
 			        //System.out.println("Step 1");
 
@@ -136,7 +137,7 @@ public final class Discord4J {
 			});
 			
 			Flux<Void> voiceStateUpdateEvent = gateway.on(VoiceStateUpdateEvent.class, event -> {
-				GPanel.setLog(Main.log.getInfo(String.valueOf(event)));
+				//GPanel.setLog(LogUtil.info("Server thread", Discord4J.class.getSimpleName(), String.valueOf(event), false));
 				
 				//System.out.println("Voice State Update Event");
 				
@@ -151,6 +152,7 @@ public final class Discord4J {
 				                .count()
 				                .flatMap(memberCount -> {
 				                    if (memberCount == 0) {
+				                    	GPanel.setLog(LogUtil.event(Discord4J.class.getSimpleName(), "channel-delete", "channel: " + channel.getName() + ":" + channel.getId().asString() + " has been deleted", false));
 				                        return channel.delete()
 				                                .doOnError(error -> {
 				                                    System.err.println("Error deleting voice channel: " + error.getMessage());

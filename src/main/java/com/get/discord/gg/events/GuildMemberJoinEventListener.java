@@ -7,6 +7,7 @@ import com.get.discord.gg.Main;
 import com.get.discord.gg.gui.GPanel;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
+import com.get.lib.logutils.LogUtil;
 
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -18,13 +19,12 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		super.onGuildMemberJoin(event);
 		Utils.loadProperties();
 		
-		System.out.println(event);
-		GPanel.setLog(Main.log.getEvent(event.toString(), event.getMember().toString()));
+		//GPanel.setLog(LogUtil.event(event, event, null, false));
 		
 		try {
 			Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		} catch (IOException e) {
-			GPanel.setLog(Main.log.getError(GuildMemberJoinEventListener.class, e.getMessage()));
+			GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), GuildMemberJoinEventListener.class.getSimpleName(), e, false));
 		}
 		
 		String roldID = Main.properties.getProperty("roleID");
@@ -32,7 +32,7 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		try {
 			event.getGuild().addRoleToMember(event.getMember().getUser(), event.getGuild().getRoleById(roldID)).queue();
 		}catch(Exception e) {
-			GPanel.setLog(Main.log.getError(GuildMemberJoinEventListener.class, e.getMessage()));
+			GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), GuildMemberJoinEventListener.class.getSimpleName(), e, false));
 		}
 	}
 }

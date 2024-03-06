@@ -2,6 +2,7 @@ package com.get.discord.gg.bot;
 
 import com.get.discord.gg.Main;
 import com.get.discord.gg.events.GuildMemberJoinEventListener;
+import com.get.discord.gg.events.GuildVoiceUpdateEventListener;
 import com.get.discord.gg.events.ReadyEventListener;
 
 import net.dv8tion.jda.api.JDABuilder;
@@ -25,6 +26,7 @@ public final class JavaDiscordAPI {
 		.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT)
 		.addEventListeners(new ReadyEventListener())
 		.addEventListeners(new GuildMemberJoinEventListener())
+		.addEventListeners(new GuildVoiceUpdateEventListener())
 		.build();
 		
 		discord4j = new com.get.discord.gg.bot.Discord4J();

@@ -38,6 +38,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="A:/Github/Discord/libraries/GitHubLib-1.0.jar"/>
-	<classpathentry kind="lib" path="A:/Github/Discord/libraries/LogUtils-1.5.7.jar"/>
+	<classpathentry kind="lib" path="A:/Github/Discord/libraries/LogUtils-1.6.2-beta18.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
