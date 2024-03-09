@@ -131,7 +131,7 @@ public final class Discord4J {
 				                                })
 				                                .onErrorResume(error -> Mono.empty());
 				                    } else {
-	                                	LogUtil.warn("Server thread", "voiceStateUpdateEvent", "return Mono.empty() | Member : " + memberCount, true, true);
+	                                	LogUtil.event("Server thread", "voiceStateUpdateEvent", "return Mono.empty() | Member : " + memberCount, true, true);
 				                        return Mono.empty();
 				                    }
 				                }))
