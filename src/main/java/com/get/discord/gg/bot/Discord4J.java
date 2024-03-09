@@ -127,17 +127,17 @@ public final class Discord4J {
 				                    	GPanel.setLog(LogUtil.event("Server thread", "channel-delete", "try to delete " + channel.getName(), true, true));
 				                        return channel.delete()
 				                                .doOnError(error -> {
-				                                	GPanel.setLog(LogUtil.event("Server thread", "voiceStateUpdateEvent", "Error deleting voice channel: " + error.getMessage(), true, true));
+				                                	GPanel.setLog(LogUtil.warn("Server thread", "voiceStateUpdateEvent", "Error deleting voice channel: " + error.getMessage(), true, true));
 				                                })
 				                                .onErrorResume(error -> Mono.empty());
 				                    } else {
-	                                	LogUtil.event("Server thread", "voiceStateUpdateEvent", "return Mono.empty() | Member : " + memberCount, true, true);
+	                                	LogUtil.warn("Server thread", "voiceStateUpdateEvent", "return Mono.empty() | Member : " + memberCount, true, true);
 				                        return Mono.empty();
 				                    }
 				                }))
 				                .then()
 				                .doOnError(error -> {
-                                	LogUtil.event("Server thread", "voiceStateUpdateEvent", "Error handling VoiceStateUpdateEvent: " + error.getMessage(), true, true);
+                                	LogUtil.warn("Server thread", "voiceStateUpdateEvent", "Error handling VoiceStateUpdateEvent: " + error.getMessage(), true, true);
 				                })
 				                .onErrorResume(error -> Mono.empty());
 			    	}
