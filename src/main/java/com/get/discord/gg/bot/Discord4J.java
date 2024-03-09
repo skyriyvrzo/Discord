@@ -124,7 +124,7 @@ public final class Discord4J {
 				                .flatMap(memberCount -> {
 				                	LogUtil.event("Server thread", "voiceStateUpdateEvent", "Member Count: " + memberCount, true, true);
 				                    if (memberCount == 0) {				
-				                    	GPanel.setLog(LogUtil.event("Server thread", "channel-delete", "try to delete " + channel.getName() + " channel", true, true));
+				                    	GPanel.setLog(LogUtil.event("Server thread", "channel-delete", "try to delete " + channel.getName(), true, true));
 				                        return channel.delete()
 				                                .doOnError(error -> {
 				                                	GPanel.setLog(LogUtil.event("Server thread", "voiceStateUpdateEvent", "Error deleting voice channel: " + error.getMessage(), true, true));
