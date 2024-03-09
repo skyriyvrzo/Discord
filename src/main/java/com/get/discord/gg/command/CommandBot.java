@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.swing.JTextField;
 
 import com.get.discord.gg.Main;
+import com.get.discord.gg.bot.Discord4J;
 import com.get.discord.gg.gui.GPanel;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
@@ -38,6 +39,9 @@ public final class CommandBot {
 				}
 				else if(tf.getText().equalsIgnoreCase("bot get categoryIdforNewRoom")) {
 					getCategoryIdforNewRoom();
+				}
+				else if(tf.getText().equalsIgnoreCase("bot get channelIdList")) {
+					Discord4J.getChannelIdList();
 				}
 				else {
 					getGetCMD();
@@ -71,36 +75,36 @@ public final class CommandBot {
 	}
 	
 	public static void getHelp() {
-		GPanel.setLog(LogUtil.info("Command", "Discord","------ Help Bot ------", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot get", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot set", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","------------------------", false));
+		GPanel.setLog(LogUtil.info("------ Help Bot ------", true, true));
+		GPanel.setLog(LogUtil.info("- bot get", true, true));
+		GPanel.setLog(LogUtil.info("- bot set", true, true));
+		GPanel.setLog(LogUtil.info("------------------------", true, true));
 	}
 	
 	private static void getGetCMD() {
-		GPanel.setLog(LogUtil.info("Command", "Discord","------ Help Bot ------", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot get botToken", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot get memberJoinRoleID", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot get channelIdforCreateRoom", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot get categoryIdforNewRoom", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","------------------------", false));
+		GPanel.setLog(LogUtil.info("------ Help Bot ------", true, true));
+		GPanel.setLog(LogUtil.info("- bot get botToken", true, true));
+		GPanel.setLog(LogUtil.info("- bot get memberJoinRoleID", true, true));
+		GPanel.setLog(LogUtil.info("- bot get channelIdforCreateRoom", true, true));
+		GPanel.setLog(LogUtil.info("- bot get categoryIdforNewRoom", true, true));
+		GPanel.setLog(LogUtil.info("------------------------", true, true));
 	}
 	
 	private static void getSetCMD() {
-		GPanel.setLog(LogUtil.info("Command", "Discord","------ Help Bot ------", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot set botToken <botToken>", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot set memberJoinRole <role_id>", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot set channelIdforCreateRoom <channel_id>", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","- bot set categoryIdforNewRoom <category_id>", false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","------------------------", false));
+		GPanel.setLog(LogUtil.info("------ Help Bot ------", true, true));
+		GPanel.setLog(LogUtil.info("- bot set botToken <botToken>", true, true));
+		GPanel.setLog(LogUtil.info("- bot set memberJoinRole <role_id>", true, true));
+		GPanel.setLog(LogUtil.info("- bot set channelIdforCreateRoom <channel_id>", true, true));
+		GPanel.setLog(LogUtil.info("- bot set categoryIdforNewRoom <category_id>", true, true));
+		GPanel.setLog(LogUtil.info("------------------------", true, true));
 	}
 	
 	private static void getBotToken() throws FileNotFoundException, IOException {
 		String botToken = Main.properties.getProperty("tokenId");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(botToken), null);
-		GPanel.setLog(LogUtil.info("Command", "Discord","Bot Token: " + botToken, false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","Copied to clipboard", false));
+		GPanel.setLog(LogUtil.info("Bot Token: " + botToken, true, true));
+		GPanel.setLog(LogUtil.info("Copied to clipboard", true, true));
 	}
 	
 	private static void getMemberJoinRoleID() throws FileNotFoundException, IOException {
@@ -108,8 +112,8 @@ public final class CommandBot {
 		String memberJoinRoleID = Main.properties.getProperty("roleId");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(memberJoinRoleID), null);
-		GPanel.setLog(LogUtil.info("Command", "Discord","RoleID: " + memberJoinRoleID, false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","Copied to clipboard", false));
+		GPanel.setLog(LogUtil.info("RoleID: " + memberJoinRoleID, true, true));
+		GPanel.setLog(LogUtil.info("Copied to clipboard", true, true));
 	}
 	
 	private static void getChannelIdforCreateRoom() {
@@ -117,8 +121,8 @@ public final class CommandBot {
 		String channelIdforCreateRoom = Main.properties.getProperty("channelIdforCreateRoom");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(channelIdforCreateRoom), null);
-		GPanel.setLog(LogUtil.info("Command", "Discord","ChannelIdforCreateRoom: " + channelIdforCreateRoom, false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","Copied to clipboard", false));
+		GPanel.setLog(LogUtil.info("ChannelIdforCreateRoom: " + channelIdforCreateRoom, true, true));
+		GPanel.setLog(LogUtil.info("Copied to clipboard", true, true));
 	}
 	
 	private static void getCategoryIdforNewRoom() {
@@ -126,8 +130,8 @@ public final class CommandBot {
 		String categoryIdforNewRoom = Main.properties.getProperty("categoryIdforNewRoom");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(categoryIdforNewRoom), null);
-		GPanel.setLog(LogUtil.info("Command", "Discord","RoleID: " + categoryIdforNewRoom, false));
-		GPanel.setLog(LogUtil.info("Command", "Discord","Copied to clipboard", false));
+		GPanel.setLog(LogUtil.info("RoleID: " + categoryIdforNewRoom, true, true));
+		GPanel.setLog(LogUtil.info("Copied to clipboard", true, true));
 	}
 	
 	private static void setBotToken(String id) throws FileNotFoundException, IOException {
@@ -150,7 +154,7 @@ public final class CommandBot {
 		
 		writer.close();
 		
-		GPanel.setLog(LogUtil.warn("Command", "Discord", "Please restart program.", false));
+		GPanel.setLog(LogUtil.warn("Please restart program.", true, true));
 	}
 	
 	private static void setMemberJoinRoleByID(String id) throws IOException {
@@ -173,7 +177,7 @@ public final class CommandBot {
 		
 		writer.close();
 		
-		GPanel.setLog(LogUtil.warn("Command", "Discord", "Please restart program.", false));
+		GPanel.setLog(LogUtil.warn("Please restart program.", true, true));
 		//Bot.buildBot();
 	}
 	
@@ -197,7 +201,7 @@ public final class CommandBot {
 		
 		writer.close();
 		
-		GPanel.setLog(LogUtil.warn("Command", "Discord", "Please restart program.", false));
+		GPanel.setLog(LogUtil.warn("Please restart program.", true, true));
 	}
 	
 	private static void setCategoryIdforNewRoom(String id) throws FileNotFoundException, IOException {
@@ -220,6 +224,6 @@ public final class CommandBot {
 		
 		writer.close();
 		
-		GPanel.setLog(LogUtil.warn("Command", "Discord", "Please restart program.", false));
+		GPanel.setLog(LogUtil.warn("Please restart program.", true, true));
 	}
 }

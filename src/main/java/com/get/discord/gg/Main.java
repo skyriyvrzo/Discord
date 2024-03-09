@@ -15,7 +15,7 @@ public final class Main {
 
 	public final static Properties properties = new Properties(); 
 	public static LogUtil log;
-	public static Github github = new Github("skyriyvrzo", "Discord", Reference.VERSIONS);
+	public static final Github github = new Github("skyriyvrzo", "Discord", Reference.VERSIONS);
 	
 	public static void main(String[] a) throws IOException {
 		

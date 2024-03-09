@@ -14,7 +14,7 @@ public final class Utils {
 		try {
 			Main.properties.load(new FileReader(Reference.getConfigFile.get()));
 		} catch (IOException e) {
-			GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), CommandBot.class.getSimpleName(), e.getMessage(), false));
+			GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), CommandBot.class.getSimpleName(), e.getMessage(), true, true));
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.get.discord.gg.events;
+package com.get.discord.gg.bot.events;
 
 import com.get.discord.gg.gui.GPanel;
 import com.get.lib.logutils.LogUtil;
@@ -13,10 +13,10 @@ public final class ReadyEventListener implements EventListener{
 	@Override
 	public void onEvent(GenericEvent event) {
 		if(event instanceof ReadyEvent r) {
-			GPanel.setLog(LogUtil.event(ReadyEvent.class.getSimpleName(), r.getState(), "bot is ready.", false));
+			GPanel.setLog(LogUtil.event(ReadyEvent.class.getSimpleName(), r.getState(), "bot is ready.", true, true));
 		}
 		else if(event instanceof StatusChangeEvent s) {
-			GPanel.setLog(LogUtil.event(StatusChangeEvent.class.getSimpleName(), s.getPropertyIdentifier(), s.getOldStatus() + " -> " + s.getNewStatus(), false));
+			GPanel.setLog(LogUtil.event(StatusChangeEvent.class.getSimpleName(), s.getPropertyIdentifier(), s.getOldStatus() + " -> " + s.getNewStatus(), true, true));
 		}
 	}
 

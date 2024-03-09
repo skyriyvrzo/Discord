@@ -30,7 +30,7 @@ public final class LogGUI implements KeyListener {
 	
 	public LogGUI() throws IOException {
 		Border lineBorder = BorderFactory.createLineBorder(Color.black);
-		f = new JFrame("[Discord] " + Reference.VERSIONS);
+		f = new JFrame("Discord " + "(" + Reference.VERSIONS + ")");
 		f.setSize(802, 501);
 		f.setLayout(null);
 		f.setFocusable(false);
@@ -90,11 +90,11 @@ public final class LogGUI implements KeyListener {
 			}
 			else if(tf.getText().contains("bot")) {
 				try {
-					System.out.println("run conditional");
+					//System.out.println("run conditional");
 					CommandBot.conditional(tf, split);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-					GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), LogGUI.class.getSimpleName(), e, false));
+					GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), LogGUI.class.getSimpleName(), e, true, true));
 				}
 			}
 			else {

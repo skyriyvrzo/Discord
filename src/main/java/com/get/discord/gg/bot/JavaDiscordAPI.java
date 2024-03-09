@@ -1,9 +1,9 @@
 package com.get.discord.gg.bot;
 
 import com.get.discord.gg.Main;
-import com.get.discord.gg.events.GuildMemberJoinEventListener;
-import com.get.discord.gg.events.GuildVoiceUpdateEventListener;
-import com.get.discord.gg.events.ReadyEventListener;
+import com.get.discord.gg.bot.events.GuildMemberJoinEventListener;
+import com.get.discord.gg.bot.events.GuildVoiceUpdateEventListener;
+import com.get.discord.gg.bot.events.ReadyEventListener;
 
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
