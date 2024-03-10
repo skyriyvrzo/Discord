@@ -29,7 +29,7 @@ public final class JavaDiscordAPI {
 		.addEventListeners(new GuildVoiceUpdateEventListener())
 		.build();
 		
-		discord4j = new com.get.discord.gg.bot.Discord4J();
+		discord4j = new Discord4J();
 	}
 	
 	public static void buildBot() {

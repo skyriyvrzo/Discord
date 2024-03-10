@@ -62,6 +62,9 @@ public final class Discord4J {
 				else if(message.getContent().equalsIgnoreCase("bot version") || message.getContent().equalsIgnoreCase("(b) -> b.ver")) {
 					return message.getChannel().flatMap(channel -> channel.createMessage(Reference.VERSIONS));
 				}
+				else if(message.getContent().equalsIgnoreCase("(b) -> exit")){
+					System.exit(0);
+				}
 				
 				return Mono.empty();
 			}).then();
