@@ -32,7 +32,6 @@ public class UnpackAssets {
     	}
 		
 		try {
-			@SuppressWarnings("resource")
 			JarFile jarfile = new JarFile(Reference.getJarPath.get());
 			Enumeration<JarEntry> enu = jarfile.entries();
 		

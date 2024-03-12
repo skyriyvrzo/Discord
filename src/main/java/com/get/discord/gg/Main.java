@@ -23,7 +23,11 @@ public final class Main {
 		
 		log = new LogUtil(Reference.getDirectory.get());
 			
-		CheckVersion.changeVersionFile();
+		try {
+			CheckVersion.changeVersionFile();
+		}catch(Exception e) {
+			LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), Main.class.getSimpleName(), e, true, true);
+		}
 		UnpackAssets.extractFile();
 		
 		log.mkdir();
