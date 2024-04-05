@@ -37,7 +37,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="A:/Github/Discord/libraries/GitHubLib-1.0.jar"/>
-	<classpathentry kind="lib" path="A:/Github/Discord/libraries/LogUtils-1.6.2-beta22.jar"/>
+	<classpathentry kind="lib" path="E:/Github/Discord/libraries/GitHubLib-1.0.jar"/>
+	<classpathentry kind="lib" path="E:/Github/Discord/libraries/LogUtils-1.6.2-beta22.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

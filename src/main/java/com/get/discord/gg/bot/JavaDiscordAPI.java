@@ -1,6 +1,6 @@
 package com.get.discord.gg.bot;
 
-import com.get.discord.gg.Main;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.bot.events.GuildMemberJoinEventListener;
 import com.get.discord.gg.bot.events.GuildVoiceUpdateEventListener;
 import com.get.discord.gg.bot.events.ReadyEventListener;
@@ -16,7 +16,7 @@ public final class JavaDiscordAPI {
 	
 	public static void runBot() {
 		
-		String botToken = (Main.properties.getProperty("tokenId") != null) ? Main.properties.getProperty("tokenId").trim() : "";
+		String botToken = (Discord.properties.getProperty("tokenId") != null) ? Discord.properties.getProperty("tokenId").trim() : "";
 		//String botToken = "MTIwNzMxNDY2NjY0MTAzNTI5NA.GuzQNY.p01Aty4m86D_AeDXjZKYm-07CbbsnnDAMWoHUU";
 		
 		//System.out.println(botToken);

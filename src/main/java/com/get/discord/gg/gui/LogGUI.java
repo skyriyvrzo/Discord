@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import com.get.discord.gg.Main;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.bot.JavaDiscordAPI;
 import com.get.discord.gg.command.CommandBot;
 import com.get.discord.gg.util.Reference;
@@ -56,7 +56,7 @@ public final class LogGUI implements KeyListener {
 		
 		f.setVisible(true);
 		
-		Main.github.showOptionDialog();
+		Discord.github.showOptionDialog();
 		
 		JavaDiscordAPI.runBot();
 	}

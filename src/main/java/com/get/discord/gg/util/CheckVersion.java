@@ -7,13 +7,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.get.discord.gg.Main;
+import com.get.discord.gg.Discord;
 
 public final class CheckVersion {
 
 	public static void changeVersionFile() throws FileNotFoundException, IOException {
-		Main.properties.load(new FileReader(Reference.getConfigFile.get()));
-		String configFileVersion = Main.properties.getProperty("version");
+		Discord.properties.load(new FileReader(Reference.getConfigFile.get()));
+		String configFileVersion = Discord.properties.getProperty("version");
 		String currentVersion = Reference.VERSIONS;
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
-import com.get.discord.gg.Main;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.GPanel;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
@@ -36,7 +36,7 @@ public final class Discord4J {
 	
 	public Discord4J() {
 		Utils.loadProperties();
-		client = DiscordClient.create((Main.properties.getProperty("tokenId") != null) ? Main.properties.getProperty("tokenId").trim() : "");
+		client = DiscordClient.create((Discord.properties.getProperty("tokenId") != null) ? Discord.properties.getProperty("tokenId").trim() : "");
 		
 		@SuppressWarnings("deprecation")
 		Mono<Void> login = client.withGateway((GatewayDiscordClient gateway) -> {
@@ -79,10 +79,10 @@ public final class Discord4J {
 				Mono<Guild> guildMono = event.getClient().getGuildById(guildID);
 				if(voiceState.getData().channelId().isEmpty() == false) {
 					Utils.loadProperties();
-					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(Main.properties.getProperty("channelIdforCreateRoom"))) {
+					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(Discord.properties.getProperty("channelIdforCreateRoom"))) {
 					guildMono.flatMap(guild -> {
 							return guild.createVoiceChannel(spec -> {
-							spec.setParentId(Snowflake.of(Main.properties.getProperty("categoryIdforNewRoom")));
+							spec.setParentId(Snowflake.of(Discord.properties.getProperty("categoryIdforNewRoom")));
 							spec.setName(globalName.get());
 						});
 					  }).subscribe(voiceChannel -> {

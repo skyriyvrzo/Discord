@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import javax.swing.JTextField;
 
-import com.get.discord.gg.Main;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.bot.Discord4J;
 import com.get.discord.gg.gui.GPanel;
 import com.get.discord.gg.util.Reference;
@@ -84,7 +84,7 @@ public final class CommandBot {
 	private static void getGetCMD() {
 		GPanel.setLog(LogUtil.info("------ Help Bot ------", true, true));
 		GPanel.setLog(LogUtil.info("- bot get botToken", true, true));
-		GPanel.setLog(LogUtil.info("- bot get memberJoinRoleID", true, true));
+		GPanel.setLog(LogUtil.info("- bot get memberJoinRoleId", true, true));
 		GPanel.setLog(LogUtil.info("- bot get channelIdforCreateRoom", true, true));
 		GPanel.setLog(LogUtil.info("- bot get categoryIdforNewRoom", true, true));
 		GPanel.setLog(LogUtil.info("------------------------", true, true));
@@ -93,14 +93,14 @@ public final class CommandBot {
 	private static void getSetCMD() {
 		GPanel.setLog(LogUtil.info("------ Help Bot ------", true, true));
 		GPanel.setLog(LogUtil.info("- bot set botToken <botToken>", true, true));
-		GPanel.setLog(LogUtil.info("- bot set memberJoinRole <role_id>", true, true));
+		GPanel.setLog(LogUtil.info("- bot set memberJoinRoleId <role_id>", true, true));
 		GPanel.setLog(LogUtil.info("- bot set channelIdforCreateRoom <channel_id>", true, true));
 		GPanel.setLog(LogUtil.info("- bot set categoryIdforNewRoom <category_id>", true, true));
 		GPanel.setLog(LogUtil.info("------------------------", true, true));
 	}
 	
 	private static void getBotToken() throws FileNotFoundException, IOException {
-		String botToken = Main.properties.getProperty("tokenId");
+		String botToken = Discord.properties.getProperty("tokenId");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(botToken), null);
 		GPanel.setLog(LogUtil.info("Bot Token: " + botToken, true, true));
@@ -109,7 +109,7 @@ public final class CommandBot {
 	
 	private static void getMemberJoinRoleID() throws FileNotFoundException, IOException {
 		Utils.loadProperties();
-		String memberJoinRoleID = Main.properties.getProperty("roleId");
+		String memberJoinRoleID = Discord.properties.getProperty("roleId");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(memberJoinRoleID), null);
 		GPanel.setLog(LogUtil.info("RoleID: " + memberJoinRoleID, true, true));
@@ -118,7 +118,7 @@ public final class CommandBot {
 	
 	private static void getChannelIdforCreateRoom() {
 		Utils.loadProperties();
-		String channelIdforCreateRoom = Main.properties.getProperty("channelIdforCreateRoom");
+		String channelIdforCreateRoom = Discord.properties.getProperty("channelIdforCreateRoom");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(channelIdforCreateRoom), null);
 		GPanel.setLog(LogUtil.info("ChannelIdforCreateRoom: " + channelIdforCreateRoom, true, true));
@@ -127,7 +127,7 @@ public final class CommandBot {
 	
 	private static void getCategoryIdforNewRoom() {
 		Utils.loadProperties();
-		String categoryIdforNewRoom = Main.properties.getProperty("categoryIdforNewRoom");
+		String categoryIdforNewRoom = Discord.properties.getProperty("categoryIdforNewRoom");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(categoryIdforNewRoom), null);
 		GPanel.setLog(LogUtil.info("RoleID: " + categoryIdforNewRoom, true, true));
@@ -136,7 +136,7 @@ public final class CommandBot {
 	
 	private static void setBotToken(String id) throws FileNotFoundException, IOException {
 		Utils.loadProperties();
-		String oldtokenID = Main.properties.getProperty("tokenId");
+		String oldtokenID = Discord.properties.getProperty("tokenId");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();
@@ -159,7 +159,7 @@ public final class CommandBot {
 	
 	private static void setMemberJoinRoleByID(String id) throws IOException {
 		Utils.loadProperties();
-		String oldRoleID = Main.properties.getProperty("roleId");
+		String oldRoleID = Discord.properties.getProperty("roleId");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();
@@ -183,7 +183,7 @@ public final class CommandBot {
 	
 	private static void setChannelIDforCreateRoom(String id) throws FileNotFoundException, IOException {
 		Utils.loadProperties();
-		String oldRoleID = Main.properties.getProperty("channelIdforCreateRoom");
+		String oldRoleID = Discord.properties.getProperty("channelIdforCreateRoom");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();
@@ -206,7 +206,7 @@ public final class CommandBot {
 	
 	private static void setCategoryIdforNewRoom(String id) throws FileNotFoundException, IOException {
 		Utils.loadProperties();
-		String oldRoleID = Main.properties.getProperty("categoryIdforNewRoom");
+		String oldRoleID = Discord.properties.getProperty("categoryIdforNewRoom");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
 		StringBuilder builder = new StringBuilder();

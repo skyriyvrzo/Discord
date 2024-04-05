@@ -12,7 +12,7 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 
-import com.get.discord.gg.Main;
+import com.get.discord.gg.Discord;
 
 public final class GPanel extends JPanel{
 	
@@ -55,6 +55,6 @@ public final class GPanel extends JPanel{
 	}
 	
 	public static void fileWriter(String s) { 
-		Main.log.writeLog(s);
+		Discord.log.writeLog(s);
 	}
 }

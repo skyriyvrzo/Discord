@@ -3,7 +3,7 @@ package com.get.discord.gg.bot.events;
 import java.io.FileReader;
 import java.io.IOException;
 
-import com.get.discord.gg.Main;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.GPanel;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
@@ -22,12 +22,12 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		//GPanel.setLog(LogUtil.event(event, event, null, false));
 		
 		try {
-			Main.properties.load(new FileReader(Reference.getConfigFile.get()));
+			Discord.properties.load(new FileReader(Reference.getConfigFile.get()));
 		} catch (IOException e) {
 			GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), GuildMemberJoinEventListener.class.getSimpleName(), e, true, true));
 		}
 		
-		String roldID = Main.properties.getProperty("roleID");
+		String roldID = Discord.properties.getProperty("roleID");
 		
 		try {
 			event.getGuild().addRoleToMember(event.getMember().getUser(), event.getGuild().getRoleById(roldID)).queue();
