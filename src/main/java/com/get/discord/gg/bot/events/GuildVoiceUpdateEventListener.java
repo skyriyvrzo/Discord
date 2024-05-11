@@ -1,7 +1,8 @@
 package com.get.discord.gg.bot.events;
 
-import com.get.discord.gg.gui.GPanel;
-import com.get.lib.logutils.LogUtil;
+import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.gui.logs.Log;
+import com.get.lib.Logging.Loggy.Level;
 
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -13,9 +14,9 @@ public class GuildVoiceUpdateEventListener extends ListenerAdapter{
 		super.onGuildVoiceUpdate(event);
 		
 		if(event.getNewValue() == null) {
-			GPanel.setLog(LogUtil.event(GuildVoiceUpdateEvent.class.getSimpleName(), event.getPropertyIdentifier(), event.getMember().getEffectiveName() + " left the " + event.getChannelLeft().getName() + " channel", true, true));
+			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, GuildVoiceUpdateEvent.class.getSimpleName(), event.getPropertyIdentifier(), event.getMember().getEffectiveName() + " left the " + event.getChannelLeft().getName() + " channel"));
 		}else {
-			GPanel.setLog(LogUtil.event(GuildVoiceUpdateEvent.class.getSimpleName(), event.getPropertyIdentifier(), event.getMember().getEffectiveName() + " joined the " + event.getChannelJoined().getName() + " channel", true, true));
+			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, GuildVoiceUpdateEvent.class.getSimpleName(), event.getPropertyIdentifier(), event.getMember().getEffectiveName() + " joined the " + event.getChannelJoined().getName() + " channel"));
 		}
 	}
 }

@@ -6,7 +6,7 @@ import com.get.discord.gg.Discord;
 
 public final class Reference {
 
-	public static final String VERSIONS = "1.4.5-RC7";
+	public static final String VERSIONS = "1.5.0";
 	
 	public static Supplier<String> getDirectory = () -> CheckOS.directory;
 	public static Supplier<String> getClassPath = () -> Discord.class.getProtectionDomain().getCodeSource().getLocation().getPath();

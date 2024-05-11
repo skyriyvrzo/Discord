@@ -31,13 +31,14 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-16">
 		<attributes>
 			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/Github/Discord/libraries/GitHubLib-1.0.jar"/>
-	<classpathentry kind="lib" path="E:/Github/Discord/libraries/LogUtils-1.6.2-beta22.jar"/>
+	<classpathentry kind="lib" path="C:/Github/Discord/libraries/GitHubLib-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Github/Discord/libraries/Loggy-0.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Github/Discord/libraries/color-lib-2.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

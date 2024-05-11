@@ -4,10 +4,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import com.get.discord.gg.Discord;
-import com.get.discord.gg.gui.GPanel;
+import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.gui.logs.Log;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
-import com.get.lib.logutils.LogUtil;
+import com.get.lib.Logging.Loggy.Level;
 
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -19,12 +20,12 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		super.onGuildMemberJoin(event);
 		Utils.loadProperties();
 		
-		//GPanel.setLog(LogUtil.event(event, event, null, false));
+		//Log.setMessage(LogUtil.event(event, event, null, false));
 		
 		try {
 			Discord.properties.load(new FileReader(Reference.getConfigFile.get()));
 		} catch (IOException e) {
-			GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), GuildMemberJoinEventListener.class.getSimpleName(), e, true, true));
+			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "onGuildMemberJoin", GuildMemberJoinEventListener.class.getSimpleName(), e));
 		}
 		
 		String roldID = Discord.properties.getProperty("roleID");
@@ -32,7 +33,7 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		try {
 			event.getGuild().addRoleToMember(event.getMember().getUser(), event.getGuild().getRoleById(roldID)).queue();
 		}catch(Exception e) {
-			GPanel.setLog(LogUtil.error(LogUtil.getEnclosingMethod(new Object() {}), GuildMemberJoinEventListener.class.getSimpleName(), e, true, true));
+			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "onGuildMemberJoin", GuildMemberJoinEventListener.class.getSimpleName(), e));
 		}
 	}
 }
