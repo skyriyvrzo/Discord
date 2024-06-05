@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.stats.java.JavaBorderLine;
 import com.get.discord.gg.gui.stats.performance.Performance;
 import com.get.discord.gg.gui.util.Theme;
@@ -25,6 +25,6 @@ public final class StatsMainPanel extends JPanel {
         this.add(new Performance());
         this.add(new JavaBorderLine());
 
-        GraphicalUserInterface.loggy.log(Level.INFO, StatsMainPanel.class.getSimpleName() + " Loaded");
+        Discord.loggy.log(Level.INFO, StatsMainPanel.class.getSimpleName() + " Loaded");
 	}
 }

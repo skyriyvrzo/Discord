@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 
 import com.get.discord.gg.Discord;
 import com.get.discord.gg.bot.Discord4J;
-import com.get.discord.gg.gui.GraphicalUserInterface;
 import com.get.discord.gg.gui.logs.Log;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
@@ -76,36 +75,36 @@ public final class CommandBot {
 	}
 	
 	public static void getHelp() {
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "------ Help Bot ------"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot get"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot set"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "------------------------"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "------ Help Bot ------"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "------------------------"));
 	}
 	
 	private static void getGetCMD() {
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "------ Help Bot ------"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot get botToken"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot get memberJoinRoleId"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot get channelIdforCreateRoom"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot get categoryIdforNewRoom"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "------------------------"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "------ Help Bot ------"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get botToken"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get memberJoinRoleId"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get channelIdforCreateRoom"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get categoryIdforNewRoom"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "------------------------"));
 	}
 	
 	private static void getSetCMD() {
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "------ Help Bot ------"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot set botToken <botToken>"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot set memberJoinRoleId <role_id>"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot set channelIdforCreateRoom <channel_id>"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "- bot set categoryIdforNewRoom <category_id>"));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "------------------------"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "------ Help Bot ------"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set botToken <botToken>"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set memberJoinRoleId <role_id>"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set channelIdforCreateRoom <channel_id>"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set categoryIdforNewRoom <category_id>"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "------------------------"));
 	}
 	
 	private static void getBotToken() throws FileNotFoundException, IOException {
 		String botToken = Discord.properties.getProperty("tokenId");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(botToken), null);
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Bot Token: " + botToken));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Copied to clipboard"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Bot Token: " + botToken));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
 	private static void getMemberJoinRoleID() throws FileNotFoundException, IOException {
@@ -113,8 +112,8 @@ public final class CommandBot {
 		String memberJoinRoleID = Discord.properties.getProperty("roleId");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(memberJoinRoleID), null);
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "RoleID: " + memberJoinRoleID));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Copied to clipboard"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "RoleID: " + memberJoinRoleID));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
 	private static void getChannelIdforCreateRoom() {
@@ -122,8 +121,8 @@ public final class CommandBot {
 		String channelIdforCreateRoom = Discord.properties.getProperty("channelIdforCreateRoom");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(channelIdforCreateRoom), null);
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "ChannelIdforCreateRoom: " + channelIdforCreateRoom));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Copied to clipboard"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "ChannelIdforCreateRoom: " + channelIdforCreateRoom));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
 	private static void getCategoryIdforNewRoom() {
@@ -131,8 +130,8 @@ public final class CommandBot {
 		String categoryIdforNewRoom = Discord.properties.getProperty("categoryIdforNewRoom");
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(categoryIdforNewRoom), null);
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "RoleID: " + categoryIdforNewRoom));
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Copied to clipboard"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "RoleID: " + categoryIdforNewRoom));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
 	private static void setBotToken(String id) throws FileNotFoundException, IOException {
@@ -155,7 +154,7 @@ public final class CommandBot {
 		
 		writer.close();
 		
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Please restart program."));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
 	}
 	
 	private static void setMemberJoinRoleByID(String id) throws IOException {
@@ -178,7 +177,7 @@ public final class CommandBot {
 		
 		writer.close();
 		
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Please restart program."));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
 		//Bot.buildBot();
 	}
 	
@@ -202,7 +201,7 @@ public final class CommandBot {
 		
 		writer.close();
 		
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Please restart program."));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
 	}
 	
 	private static void setCategoryIdforNewRoom(String id) throws FileNotFoundException, IOException {
@@ -225,6 +224,6 @@ public final class CommandBot {
 		
 		writer.close();
 		
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Please restart program."));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
 	}
 }

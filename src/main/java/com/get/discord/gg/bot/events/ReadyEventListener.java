@@ -1,6 +1,6 @@
 package com.get.discord.gg.bot.events;
 
-import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.logs.Log;
 import com.get.lib.Logging.Loggy.Level;
 
@@ -14,10 +14,10 @@ public final class ReadyEventListener implements EventListener{
 	@Override
 	public void onEvent(GenericEvent event) {
 		if(event instanceof ReadyEvent r) {
-			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, ReadyEvent.class.getSimpleName(), r.getState(), "bot is ready."));
+			Log.setMessage(Discord.loggy.log(Level.INFO, ReadyEvent.class.getSimpleName(), r.getState(), "bot is ready."));
 		}
 		else if(event instanceof StatusChangeEvent s) {
-			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, StatusChangeEvent.class.getSimpleName(), s.getPropertyIdentifier(), s.getOldStatus() + " -> " + s.getNewStatus()));
+			Log.setMessage(Discord.loggy.log(Level.INFO, StatusChangeEvent.class.getSimpleName(), s.getPropertyIdentifier(), s.getOldStatus() + " -> " + s.getNewStatus()));
 		}
 	}
 

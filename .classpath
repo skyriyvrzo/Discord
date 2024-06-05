@@ -38,7 +38,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Github/Discord/libraries/GitHubLib-1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Github/Discord/libraries/Loggy-0.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Github/Discord/libraries/Loggy-0.1.41.jar"/>
 	<classpathentry kind="lib" path="C:/Github/Discord/libraries/color-lib-2.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

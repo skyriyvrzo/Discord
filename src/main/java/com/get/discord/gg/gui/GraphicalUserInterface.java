@@ -20,7 +20,6 @@ import com.get.discord.gg.gui.stats.StatsMainPanel;
 import com.get.discord.gg.gui.stats.performance.Performance;
 import com.get.discord.gg.gui.util.Theme;
 import com.get.discord.gg.util.Reference;
-import com.get.lib.Logging.Loggy;
 import com.get.lib.Logging.Loggy.Level;
 
 public class GraphicalUserInterface {
@@ -28,8 +27,6 @@ public class GraphicalUserInterface {
 private static JFrame frame = new JFrame("Discord (" + Reference.VERSIONS + ")");
 		
 	private static ImageIcon icon = null;
-	
-	public static final Loggy loggy = Loggy.getLoggy(Reference.getDirectory.get() + "logs", true, true, true);
 	
 	public GraphicalUserInterface(String s) throws IOException {
 		
@@ -122,7 +119,7 @@ private static JFrame frame = new JFrame("Discord (" + Reference.VERSIONS + ")")
 		
 		//setDelay();
 		Thread setStats = new Thread(() -> {
-			loggy.log(Level.TRACE, "setDelay enabled.");
+			Discord.loggy.log(Level.TRACE, "setDelay enabled.");
 			
 			while(true) {
 				Performance.setText();
@@ -135,7 +132,7 @@ private static JFrame frame = new JFrame("Discord (" + Reference.VERSIONS + ")")
 		});
 		setStats.start();
 		
-		Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "For help, type \"help\" or \"?\""));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "For help, type \"help\" or \"?\""));
 		System.out.println("EIEE");
 		Discord.github.showOptionDialog();
 		JavaDiscordAPI.runBot();

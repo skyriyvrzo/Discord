@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.util.Theme;
 import com.get.lib.Logging.Loggy.Level;
 
@@ -24,6 +24,6 @@ public final class JavaBorderLine extends JPanel {
         this.setFocusable(false);
         this.add(new JavaInfo());
         
-        GraphicalUserInterface.loggy.log(Level.INFO, JavaBorderLine.class.getSimpleName() + " Loaded");
+        Discord.loggy.log(Level.INFO, JavaBorderLine.class.getSimpleName() + " Loaded");
 	}
 }

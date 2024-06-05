@@ -10,7 +10,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
 
-import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.util.Theme;
 import com.get.lib.Logging.Loggy.Level;
 
@@ -49,7 +49,7 @@ public final class Log extends JPanel {
         pane.setBorder(border);
         this.add(pane);
         
-        GraphicalUserInterface.loggy.log(Level.INFO, Log.class.getSimpleName() + " Loaded");
+        Discord.loggy.log(Level.INFO, Log.class.getSimpleName() + " Loaded");
 	}
 
 	public static void setMessage(String s) {

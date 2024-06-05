@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JTextArea;
 
-import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.util.Theme;
 import com.get.lib.Logging.Loggy.Level;
 
@@ -30,6 +30,6 @@ public final class JavaInfo extends JTextArea {
         this.setBackground(Theme.JavaInfoBackground);
         this.setForeground(Theme.JavaInfoForeground);
         
-        GraphicalUserInterface.loggy.log(Level.INFO, JavaInfo.class.getSimpleName() + " Loaded");
+        Discord.loggy.log(Level.INFO, JavaInfo.class.getSimpleName() + " Loaded");
 	}
 }

@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Random;
 
 import com.get.discord.gg.Discord;
-import com.get.discord.gg.gui.GraphicalUserInterface;
 import com.get.discord.gg.gui.logs.Log;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
@@ -44,8 +43,8 @@ public final class Discord4J {
 			Mono<Void> printOnLogin = gateway.on(ReadyEvent.class, event ->
 				Mono.fromRunnable(() -> {
 					final User seft = event.getSelf();
-					Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Server", Discord4J.class.getSimpleName(), String.format("Logged in as %s#%s", seft.getUsername(), seft.getDiscriminator())));
-					Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Server", Discord4J.class.getSimpleName(), "bot is now online."));
+					Log.setMessage(Discord.loggy.log(Level.INFO, "Server", Discord4J.class.getSimpleName(), String.format("Logged in as %s#%s", seft.getUsername(), seft.getDiscriminator())));
+					Log.setMessage(Discord.loggy.log(Level.INFO, "Server", Discord4J.class.getSimpleName(), "bot is now online."));
 				}))
 				.then();
 			
@@ -86,7 +85,7 @@ public final class Discord4J {
 							spec.setName(globalName.get());
 						});
 					  }).subscribe(voiceChannel -> {
-						Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, Discord4J.class.getSimpleName(), "channel-create", voiceChannel.getName() + "(" + voiceChannel.getId().asString() + ") has been created"));
+						Log.setMessage(Discord.loggy.log(Level.INFO, Discord4J.class.getSimpleName(), "channel-create", voiceChannel.getName() + "(" + voiceChannel.getId().asString() + ") has been created"));
 						if(!voiceChannelIDList.contains(voiceChannel.getId())) {
 							voiceChannelIDList.add(voiceChannel.getId());
 						}	
@@ -115,7 +114,7 @@ public final class Discord4J {
 			
 			Flux<Void> voiceStateUpdateEvent = gateway.on(VoiceStateUpdateEvent.class, event -> {
 			    Optional<Snowflake> channelIdBefore = event.getOld().map(VoiceState::getChannelId).orElse(null);
-			    GraphicalUserInterface.loggy.log(Level.TRACE, "Server", "voiceStateUpdateEvent", "ChannelIdBefore: " + channelIdBefore.get().asString());
+			    Discord.loggy.log(Level.TRACE, "Server", "voiceStateUpdateEvent", "ChannelIdBefore: " + channelIdBefore.get().asString());
 			    
 			    if(channelIdBefore != null) {
 			    	if(voiceChannelIDList.contains(channelIdBefore.get())) {
@@ -125,22 +124,22 @@ public final class Discord4J {
 				    	return channelMono.flatMap(channel -> channel.getVoiceStates()
 				                .count()
 				                .flatMap(memberCount -> {
-				                	GraphicalUserInterface.loggy.log(Level.TRACE, "Server", "voiceStateUpdateEvent", "Member Count: " + memberCount);
+				                	Discord.loggy.log(Level.TRACE, "Server", "voiceStateUpdateEvent", "Member Count: " + memberCount);
 				                    if (memberCount == 0) {				
-				                    	Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Server", "channel-delete", "try to delete " + channel.getName()));
+				                    	Log.setMessage(Discord.loggy.log(Level.INFO, "Server", "channel-delete", "try to delete " + channel.getName()));
 				                        return channel.delete()
 				                                .doOnError(error -> {
-				                                	Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "Server", "voiceStateUpdateEvent", "Error deleting voice channel: " + error.getMessage()));
+				                                	Log.setMessage(Discord.loggy.log(Level.INFO, "Server", "voiceStateUpdateEvent", "Error deleting voice channel: " + error.getMessage()));
 				                                })
 				                                .onErrorResume(error -> Mono.empty());
 				                    } else {
-	                                	GraphicalUserInterface.loggy.log(Level.TRACE, "Server", "voiceStateUpdateEvent", "return Mono.empty() | Member : " + memberCount);
+	                                	Discord.loggy.log(Level.TRACE, "Server", "voiceStateUpdateEvent", "return Mono.empty() | Member : " + memberCount);
 				                        return Mono.empty();
 				                    }
 				                }))
 				                .then()
 				                .doOnError(error -> {
-                                	GraphicalUserInterface.loggy.log(Level.TRACE, "Server thread", "voiceStateUpdateEvent", "Error handling VoiceStateUpdateEvent: " + error.getMessage());
+                                	Discord.loggy.log(Level.TRACE, "Server thread", "voiceStateUpdateEvent", "Error handling VoiceStateUpdateEvent: " + error.getMessage());
 				                })
 				                .onErrorResume(error -> Mono.empty());
 			    	}
@@ -157,7 +156,7 @@ public final class Discord4J {
 	
 	public static void getChannelIdList() {
 		for(var a : voiceChannelIDList) {
-			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "getChannelIdList" , Discord4J.class.getSimpleName(), a.asString()));
+			Log.setMessage(Discord.loggy.log(Level.INFO, "getChannelIdList" , Discord4J.class.getSimpleName(), a.asString()));
 		}
 	}
 }

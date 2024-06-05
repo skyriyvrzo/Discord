@@ -1,6 +1,6 @@
 package com.get.discord.gg.bot.events;
 
-import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.logs.Log;
 import com.get.lib.Logging.Loggy.Level;
 
@@ -14,9 +14,9 @@ public class GuildVoiceUpdateEventListener extends ListenerAdapter{
 		super.onGuildVoiceUpdate(event);
 		
 		if(event.getNewValue() == null) {
-			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, GuildVoiceUpdateEvent.class.getSimpleName(), event.getPropertyIdentifier(), event.getMember().getEffectiveName() + " left the " + event.getChannelLeft().getName() + " channel"));
+			Log.setMessage(Discord.loggy.log(Level.INFO, GuildVoiceUpdateEvent.class.getSimpleName(), event.getPropertyIdentifier(), event.getMember().getEffectiveName() + " left the " + event.getChannelLeft().getName() + " channel"));
 		}else {
-			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, GuildVoiceUpdateEvent.class.getSimpleName(), event.getPropertyIdentifier(), event.getMember().getEffectiveName() + " joined the " + event.getChannelJoined().getName() + " channel"));
+			Log.setMessage(Discord.loggy.log(Level.INFO, GuildVoiceUpdateEvent.class.getSimpleName(), event.getPropertyIdentifier(), event.getMember().getEffectiveName() + " joined the " + event.getChannelJoined().getName() + " channel"));
 		}
 	}
 }

@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import com.get.discord.gg.Discord;
-import com.get.discord.gg.gui.GraphicalUserInterface;
 import com.get.discord.gg.gui.logs.Log;
 import com.get.discord.gg.util.Reference;
 import com.get.discord.gg.util.Utils;
@@ -25,7 +24,7 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		try {
 			Discord.properties.load(new FileReader(Reference.getConfigFile.get()));
 		} catch (IOException e) {
-			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "onGuildMemberJoin", GuildMemberJoinEventListener.class.getSimpleName(), e));
+			Log.setMessage(Discord.loggy.log(Level.INFO, "onGuildMemberJoin", GuildMemberJoinEventListener.class.getSimpleName(), e));
 		}
 		
 		String roldID = Discord.properties.getProperty("roleID");
@@ -33,7 +32,7 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		try {
 			event.getGuild().addRoleToMember(event.getMember().getUser(), event.getGuild().getRoleById(roldID)).queue();
 		}catch(Exception e) {
-			Log.setMessage(GraphicalUserInterface.loggy.log(Level.INFO, "onGuildMemberJoin", GuildMemberJoinEventListener.class.getSimpleName(), e));
+			Log.setMessage(Discord.loggy.log(Level.INFO, "onGuildMemberJoin", GuildMemberJoinEventListener.class.getSimpleName(), e));
 		}
 	}
 }

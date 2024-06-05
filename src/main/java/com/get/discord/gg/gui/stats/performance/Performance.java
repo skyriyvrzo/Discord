@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
-import com.get.discord.gg.gui.GraphicalUserInterface;
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.gui.util.Theme;
 import com.get.lib.Logging.Loggy.Level;
 import com.get.lib.colorlib.ColorLib;
@@ -146,7 +146,7 @@ public final class Performance extends JTextArea {
         setBoard();
         setTextColor();
 
-        GraphicalUserInterface.loggy.log(Level.INFO, Performance.class.getSimpleName() + " Loaded");
+        Discord.loggy.log(Level.INFO, Performance.class.getSimpleName() + " Loaded");
         setVisible(true);
     }
     

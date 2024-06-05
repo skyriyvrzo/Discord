@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import com.get.discord.gg.Discord;
 import com.get.discord.gg.command.CommandBot;
-import com.get.discord.gg.gui.GraphicalUserInterface;
 import com.get.discord.gg.gui.commands.RegisterCommand;
 import com.get.discord.gg.gui.util.Theme;
 import com.get.lib.Logging.Loggy.Level;
@@ -50,7 +50,7 @@ public final class CommandBox extends JPanel implements KeyListener {
         this.add(tf);
         //properties.load(reader);
         
-        GraphicalUserInterface.loggy.log(Level.INFO, CommandBox.class.getSimpleName() + " Loaded");
+        Discord.loggy.log(Level.INFO, CommandBox.class.getSimpleName() + " Loaded");
     }
     
 	@Override
@@ -73,7 +73,7 @@ public final class CommandBox extends JPanel implements KeyListener {
 			
 			String[] split = tf.getText().split(" ");
 			
-			GraphicalUserInterface.loggy.log(Level.TRACE, tf.getText());
+			Discord.loggy.log(Level.TRACE, tf.getText());
 			
 			if(commandList.size() != 0) {
 				
@@ -100,7 +100,7 @@ public final class CommandBox extends JPanel implements KeyListener {
 					CommandBot.conditional(tf, split);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
-					com.get.discord.gg.gui.logs.Log.setMessage(GraphicalUserInterface.loggy.log(Level.ERROR, CommandBox.class.getSimpleName(), e1.getClass().getSimpleName(), e1));
+					com.get.discord.gg.gui.logs.Log.setMessage(Discord.loggy.log(Level.ERROR, CommandBox.class.getSimpleName(), e1.getClass().getSimpleName(), e1));
 				}
 			}
 			
