@@ -36,7 +36,7 @@ public final class Discord {
 		try {
 			CheckVersion.changeVersionFile();
 		}catch(Exception e) {
-			Discord.loggy.log(Level.ERROR, "main", e.getClass().getSimpleName(), e);
+			loggy.log(Level.ERROR, "main", e.getClass().getSimpleName(), e);
 		}
 		UnpackAssets.extractFile();
 		

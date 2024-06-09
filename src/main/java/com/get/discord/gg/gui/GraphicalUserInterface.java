@@ -133,7 +133,6 @@ private static JFrame frame = new JFrame("Discord (" + Reference.VERSIONS + ")")
 		setStats.start();
 		
 		Log.setMessage(Discord.loggy.log(Level.INFO, "For help, type \"help\" or \"?\""));
-		System.out.println("EIEE");
 		Discord.github.showOptionDialog();
 		JavaDiscordAPI.runBot();
 	}
