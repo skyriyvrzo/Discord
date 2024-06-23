@@ -31,11 +31,11 @@ public final class CommandBot {
 					else if(tf.getText().equalsIgnoreCase("bot get memberJoinRoleId")) {
 						getMemberJoinRoleID();
 					}
-					else if(tf.getText().equalsIgnoreCase("bot get channelIdforCreateRoom")) {
-						getChannelIdforCreateRoom();
+					else if(tf.getText().equalsIgnoreCase("bot get channelIdForCreateRoom")) {
+						getchannelIdForCreateRoom();
 					}
-					else if(tf.getText().equalsIgnoreCase("bot get categoryIdforNewRoom")) {
-						getCategoryIdforNewRoom();
+					else if(tf.getText().equalsIgnoreCase("bot get categoryIdForCreateRoom")) {
+						getcategoryIdForCreateRoom();
 					}
 					else if(tf.getText().equalsIgnoreCase("bot get channelIdList")) {
 						Discord4J.getChannelIdList();
@@ -54,11 +54,11 @@ public final class CommandBot {
 					else if(split[2].equalsIgnoreCase("memberJoinRoleId") && split.length == 4){
 						setMemberJoinRoleByID(split[3]);
 					}
-					else if(split[2].equalsIgnoreCase("channelIdforCreateRoom") && split.length == 4) {
-						setChannelIDforCreateRoom(split[3]);
+					else if(split[2].equalsIgnoreCase("channelIdForCreateRoom") && split.length == 4) {
+						setchannelIdForCreateRoom(split[3]);
 					}
-					else if(split[2].equalsIgnoreCase("categoryIdforNewRoom") && split.length == 4) {
-						setCategoryIdforNewRoom(split[3]);
+					else if(split[2].equalsIgnoreCase("categoryIdForCreateRoom") && split.length == 4) {
+						setcategoryIdForCreateRoom(split[3]);
 					}
 					else {
 						getSetCMD();
@@ -84,8 +84,8 @@ public final class CommandBot {
 		Log.setMessage(Discord.loggy.log(Level.INFO, "------ Help Bot ------"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get botToken"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get memberJoinRoleId"));
-		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get channelIdforCreateRoom"));
-		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get categoryIdforNewRoom"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get channelIdForCreateRoom"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get categoryIdForCreateRoom"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "------------------------"));
 	}
 	
@@ -93,8 +93,8 @@ public final class CommandBot {
 		Log.setMessage(Discord.loggy.log(Level.INFO, "------ Help Bot ------"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set botToken <botToken>"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set memberJoinRoleId <role_id>"));
-		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set channelIdforCreateRoom <channel_id>"));
-		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set categoryIdforNewRoom <category_id>"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set channelIdForCreateRoom <channel_id>"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set categoryIdForCreateRoom <category_id>"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "------------------------"));
 	}
 	
@@ -115,21 +115,21 @@ public final class CommandBot {
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
-	private static void getChannelIdforCreateRoom() {
+	private static void getchannelIdForCreateRoom() {
 		Utils.loadProperties();
-		String channelIdforCreateRoom = Discord.properties.getProperty("channelIdforCreateRoom");
+		String channelIdForCreateRoom = Discord.properties.getProperty("channelIdForCreateRoom");
 		
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(channelIdforCreateRoom), null);
-		Log.setMessage(Discord.loggy.log(Level.INFO, "ChannelIdforCreateRoom: " + channelIdforCreateRoom));
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(channelIdForCreateRoom), null);
+		Log.setMessage(Discord.loggy.log(Level.INFO, "channelIdForCreateRoom: " + channelIdForCreateRoom));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
-	private static void getCategoryIdforNewRoom() {
+	private static void getcategoryIdForCreateRoom() {
 		Utils.loadProperties();
-		String categoryIdforNewRoom = Discord.properties.getProperty("categoryIdforNewRoom");
+		String categoryIdForCreateRoom = Discord.properties.getProperty("categoryIdForCreateRoom");
 		
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(categoryIdforNewRoom), null);
-		Log.setMessage(Discord.loggy.log(Level.INFO, "RoleID: " + categoryIdforNewRoom));
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(categoryIdForCreateRoom), null);
+		Log.setMessage(Discord.loggy.log(Level.INFO, "RoleID: " + categoryIdForCreateRoom));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
@@ -180,9 +180,9 @@ public final class CommandBot {
 		//Bot.buildBot();
 	}
 	
-	private static void setChannelIDforCreateRoom(String id) throws FileNotFoundException, IOException {
+	private static void setchannelIdForCreateRoom(String id) throws FileNotFoundException, IOException {
 		Utils.loadProperties();
-		String oldRoleID = Discord.properties.getProperty("channelIdforCreateRoom");
+		String oldRoleID = Discord.properties.getProperty("channelIdForCreateRoom");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
 		StringBuilder builder = new StringBuilder();
@@ -203,9 +203,9 @@ public final class CommandBot {
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
 	}
 	
-	private static void setCategoryIdforNewRoom(String id) throws FileNotFoundException, IOException {
+	private static void setcategoryIdForCreateRoom(String id) throws FileNotFoundException, IOException {
 		Utils.loadProperties();
-		String oldRoleID = Discord.properties.getProperty("categoryIdforNewRoom");
+		String oldRoleID = Discord.properties.getProperty("categoryIdForCreateRoom");
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
 		StringBuilder builder = new StringBuilder();

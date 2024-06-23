@@ -26,7 +26,7 @@ public final class Discord {
 		System.out.println("Starting " + Discord.class.getCanonicalName());
 		
 		try {
-			Thread.sleep(5000L);
+			Thread.sleep(1000L);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

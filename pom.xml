@@ -2,13 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>xyz.cuddlecloud.discord</groupId>
   <artifactId>Discord</artifactId>
-  <version>1.5.4</version>
+  <version>1.5.5</version>
   
   <dependencies>
   	<dependency>
     	<groupId>net.dv8tion</groupId>
     	<artifactId>JDA</artifactId>
-    	<version>5.0.0-beta.20</version>
+    	<version>5.0.0-beta.24</version>
     </dependency>
     
     <dependency>

@@ -1,5 +1,9 @@
 package xyz.cuddlecloud.discord.util;
 
+import xyz.cuddlecloud.discord.Discord;
+import xyz.cuddlecloud.discord.gui.logs.Log;
+import xyz.cuddlecloud.javax.logging.Loggy;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -24,15 +28,18 @@ public class UnpackAssets {
     		FileWriter writer = new FileWriter(Reference.configFile.get(), true);
     		
     		writer.write("version: "+Reference.VERSIONS +"\n");
-    		writer.write("tokenId: {token}\n");
-    		writer.write("roleId: {role}\n");
-    		writer.write("channelIdforCreateRoom: {channel_id}\n");
-    		writer.write("categoryIdforNewRoom: {category_id}");
+    		writer.write("tokenId: {token}\n\n");
+
+			writer.write("#Member joins\n");
+    		writer.write("roleId: {role}\n\n");
+
+			writer.write("#Create channel\n");
+			writer.write("categoryIdForCreateRoom: {category_id}\n");
+    		writer.write("channelIdForCreateRoom: {channel_id}");
     		writer.close();
     	}
 		
 		try {
-			@SuppressWarnings("resource")
 			JarFile jarfile = new JarFile(Reference.jarPath.get());
 			Enumeration<JarEntry> enu = jarfile.entries();
 		
@@ -40,7 +47,7 @@ public class UnpackAssets {
 				String targetDir = directory;
 				JarEntry je = enu.nextElement();
 
-				if(je.getName().contains("resources")) {
+				if(je.getName().contains("assets")) {
 										
 					File fl = new File(targetDir, je.getName());
 					if(!fl.exists()) {

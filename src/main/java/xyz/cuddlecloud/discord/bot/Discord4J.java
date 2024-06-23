@@ -1,6 +1,7 @@
 package xyz.cuddlecloud.discord.bot;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -26,6 +27,7 @@ import discord4j.core.object.entity.channel.VoiceChannel;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Deprecated
 public final class Discord4J {
 
 	private static Snowflake userID;
@@ -72,16 +74,16 @@ public final class Discord4J {
 				userID = event.getCurrent().getUserId();
 				VoiceState voiceState = event.getCurrent();
 				Random random = new Random();
-				globalName = voiceState.getData().member().get().user().globalName().isEmpty() ? Optional.ofNullable("Room " + random.nextInt(100) + ((char) (random.nextInt(26) + 65))) : voiceState.getData().member().get().user().globalName();
+				globalName = voiceState.getData().member().get().user().globalName().isEmpty() ? Optional.of("Room " + random.nextInt(100) + ((char) (random.nextInt(26) + 65))) : voiceState.getData().member().get().user().globalName();
 				guildID = voiceState.getGuildId();
 	
 				Mono<Guild> guildMono = event.getClient().getGuildById(guildID);
 				if(!voiceState.getData().channelId().isEmpty()) {
 					Utils.loadProperties();
-					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(Discord.properties.getProperty("channelIdforCreateRoom"))) {
+					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(Discord.properties.getProperty("channelIdForCreateRoom"))) {
 					guildMono.flatMap(guild -> {
 							return guild.createVoiceChannel(spec -> {
-							spec.setParentId(Snowflake.of(Discord.properties.getProperty("categoryIdforNewRoom")));
+							spec.setParentId(Snowflake.of(Discord.properties.getProperty("categoryIdForCreateRoom")));
 							spec.setName(globalName.get());
 						});
 					  }).subscribe(voiceChannel -> {
@@ -158,5 +160,9 @@ public final class Discord4J {
 		for(var a : voiceChannelIDList) {
 			Log.setMessage(Discord.loggy.log(Level.INFO, a.asString()));
 		}
+	}
+
+	public static List<Snowflake> getListOfChannelId() {
+		return voiceChannelIDList;
 	}
 }

@@ -76,7 +76,7 @@ public final class CommandBox extends JPanel implements KeyListener {
 			
 			String[] split = tf.getText().split(" ");
 			
-			Discord.loggy.log(Level.TRACE, tf.getText());
+			Log.setMessage(Discord.loggy.log(Level.TRACE, tf.getText()));
 			
 			if(commandList.size() != 0) {
 				
