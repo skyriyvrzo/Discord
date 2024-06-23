@@ -2,7 +2,7 @@ package xyz.cuddlecloud.discord.bot.events;
 
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.gui.logs.Log;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.StatusChangeEvent;
@@ -14,10 +14,10 @@ public final class ReadyEventListener implements EventListener{
 	@Override
 	public void onEvent(GenericEvent event) {
 		if(event instanceof ReadyEvent r) {
-			Log.setMessage(Discord.loggy.log(Level.INFO, ReadyEvent.class.getSimpleName(), r.getState(), "bot is ready."));
+			Log.setMessage(Discord.loggy.log(Level.INFO, "bot is ready."));
 		}
 		else if(event instanceof StatusChangeEvent s) {
-			Log.setMessage(Discord.loggy.log(Level.INFO, StatusChangeEvent.class.getSimpleName(), s.getPropertyIdentifier(), s.getOldStatus() + " -> " + s.getNewStatus()));
+			Log.setMessage(Discord.loggy.log(Level.INFO, String.valueOf(s.getOldStatus()).toLowerCase() + " -> " + String.valueOf(s.getNewStatus()).toLowerCase()));
 		}
 	}
 

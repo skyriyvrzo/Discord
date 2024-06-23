@@ -1,9 +1,9 @@
 package xyz.cuddlecloud.discord.gui.util;
 
+import xyz.cuddlecloud.javax.colorlib.ColorLib;
+
 import java.awt.Color;
 import java.awt.Font;
-
-import com.get.lib.colorlib.ColorLib;
 
 public final class Theme {
 	

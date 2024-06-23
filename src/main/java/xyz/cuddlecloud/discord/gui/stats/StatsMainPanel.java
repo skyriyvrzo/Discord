@@ -9,7 +9,7 @@ import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.gui.stats.java.JavaBorderLine;
 import xyz.cuddlecloud.discord.gui.stats.performance.Performance;
 import xyz.cuddlecloud.discord.gui.util.Theme;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 public final class StatsMainPanel extends JPanel {
 

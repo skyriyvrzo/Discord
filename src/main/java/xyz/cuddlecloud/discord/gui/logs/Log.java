@@ -12,7 +12,7 @@ import javax.swing.text.DefaultCaret;
 
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.gui.util.Theme;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 public final class Log extends JPanel {
 
@@ -54,5 +54,6 @@ public final class Log extends JPanel {
 
 	public static void setMessage(String s) {
 		log.append(s);
+        log.setCaretPosition(log.getDocument().getLength());
 	}
 }

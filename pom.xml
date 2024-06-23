@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.get.discord.autorole</groupId>
+  <groupId>xyz.cuddlecloud.discord</groupId>
   <artifactId>Discord</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.5.4</version>
   
   <dependencies>
   	<dependency>
@@ -28,9 +28,47 @@
     	<artifactId>oshi-core</artifactId>
     	<version>6.4.12</version>
     </dependency>
+
+      <dependency>
+          <groupId>xyz.cuddlecloud.javax.logging</groupId>
+          <artifactId>Loggy</artifactId>
+          <version>0.1.51</version>
+      </dependency>
+
+      <dependency>
+          <groupId>xyz.cuddlecloud.javax.github</groupId>
+          <artifactId>GitHubLib</artifactId>
+          <version>1.1</version>
+      </dependency>
+
+      <dependency>
+          <groupId>xyz.cuddlecloud.javax.colorlib</groupId>
+          <artifactId>color-lib</artifactId>
+          <version>2.0</version>
+      </dependency>
   </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>xyz.cuddlecloud.discord.Discord</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

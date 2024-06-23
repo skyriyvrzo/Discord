@@ -11,17 +11,17 @@ import java.util.jar.JarFile;
 
 public class UnpackAssets {
 
-	private static String directory = Reference.getDirectory.get();
+	private static String directory = Reference.directory.get();
 	
 	public static void extractFile() throws IOException {
 		
-		File dir = new File(Reference.getDirectory.get());
-		dir.mkdir();
+		File dir = new File(Reference.directory.get());
+		dir.mkdirs();
 		
-		File config = new File(Reference.getConfigFile.get());
+		File config = new File(Reference.configFile.get());
 		if(config.exists());
     	else {
-    		FileWriter writer = new FileWriter(Reference.getConfigFile.get(), true);
+    		FileWriter writer = new FileWriter(Reference.configFile.get(), true);
     		
     		writer.write("version: "+Reference.VERSIONS +"\n");
     		writer.write("tokenId: {token}\n");
@@ -33,7 +33,7 @@ public class UnpackAssets {
 		
 		try {
 			@SuppressWarnings("resource")
-			JarFile jarfile = new JarFile(Reference.getJarPath.get());
+			JarFile jarfile = new JarFile(Reference.jarPath.get());
 			Enumeration<JarEntry> enu = jarfile.entries();
 		
 			while(enu.hasMoreElements()) {

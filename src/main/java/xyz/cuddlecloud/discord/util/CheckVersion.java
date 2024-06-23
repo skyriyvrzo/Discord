@@ -12,11 +12,11 @@ import xyz.cuddlecloud.discord.Discord;
 public final class CheckVersion {
 
 	public static void changeVersionFile() throws FileNotFoundException, IOException {
-		Discord.properties.load(new FileReader(Reference.getConfigFile.get()));
+		Discord.properties.load(new FileReader(Reference.configFile.get()));
 		String configFileVersion = Discord.properties.getProperty("version");
 		String currentVersion = Reference.VERSIONS;
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -27,7 +27,7 @@ public final class CheckVersion {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();

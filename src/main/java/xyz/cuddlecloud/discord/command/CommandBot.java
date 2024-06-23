@@ -1,13 +1,8 @@
 package xyz.cuddlecloud.discord.command;
 
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.datatransfer.StringSelection;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 import javax.swing.JTextField;
 
@@ -16,57 +11,61 @@ import xyz.cuddlecloud.discord.bot.Discord4J;
 import xyz.cuddlecloud.discord.gui.logs.Log;
 import xyz.cuddlecloud.discord.util.Reference;
 import xyz.cuddlecloud.discord.util.Utils;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 public final class CommandBot {
 
 	//private static String role_id;
 	
-	public static void conditional(JTextField tf, String split[]) throws IOException {
+	public static void conditional(JTextField tf, String[] split) throws IOException {
 		
 		try {
-			if(tf.getText().equalsIgnoreCase("bot")) {
-				getHelp();
-			}else if(split[1].equalsIgnoreCase("get")) {
-				if(tf.getText().equalsIgnoreCase("bot get botToken")) {
-					getBotToken();
+			if(split[0].equalsIgnoreCase("bot")) {
+				if(tf.getText().equalsIgnoreCase("bot")){
+					getHelp();
 				}
-				else if(tf.getText().equalsIgnoreCase("bot get memberJoinRoleId")) {
-					getMemberJoinRoleID();
+				else if(split[1].equalsIgnoreCase("get")) {
+					if(tf.getText().equalsIgnoreCase("bot get botToken")) {
+						getBotToken();
+					}
+					else if(tf.getText().equalsIgnoreCase("bot get memberJoinRoleId")) {
+						getMemberJoinRoleID();
+					}
+					else if(tf.getText().equalsIgnoreCase("bot get channelIdforCreateRoom")) {
+						getChannelIdforCreateRoom();
+					}
+					else if(tf.getText().equalsIgnoreCase("bot get categoryIdforNewRoom")) {
+						getCategoryIdforNewRoom();
+					}
+					else if(tf.getText().equalsIgnoreCase("bot get channelIdList")) {
+						Discord4J.getChannelIdList();
+					}
+					else {
+						getGetCMD();
+					}
 				}
-				else if(tf.getText().equalsIgnoreCase("bot get channelIdforCreateRoom")) {
-					getChannelIdforCreateRoom();
-				}
-				else if(tf.getText().equalsIgnoreCase("bot get categoryIdforNewRoom")) {
-					getCategoryIdforNewRoom();
-				}
-				else if(tf.getText().equalsIgnoreCase("bot get channelIdList")) {
-					Discord4J.getChannelIdList();
-				}
-				else {
-					getGetCMD();
-				}
-			}else if(split[1].equalsIgnoreCase("set")) {
-				if(tf.getText().trim().equalsIgnoreCase("bot set")) {
-					getSetCMD();
-				}
-				else if(split[2].equalsIgnoreCase("botToken") && split.length == 4) {
-					setBotToken(split[3]);
-				}
-				else if(split[2].equalsIgnoreCase("memberJoinRoleId") && split.length == 4){
-					setMemberJoinRoleByID(split[3]);
-				}
-				else if(split[2].equalsIgnoreCase("channelIdforCreateRoom") && split.length == 4) {
-					setChannelIDforCreateRoom(split[3]);
-				}
-				else if(split[2].equalsIgnoreCase("categoryIdforNewRoom") && split.length == 4) {
-					setCategoryIdforNewRoom(split[3]);
-				}
-				else {
-					getSetCMD();
+				else if(split[1].equalsIgnoreCase("set")) {
+					if(tf.getText().trim().equalsIgnoreCase("bot set")) {
+						getSetCMD();
+					}
+					else if(split[2].equalsIgnoreCase("botToken") && split.length == 4) {
+						setBotToken(split[3]);
+					}
+					else if(split[2].equalsIgnoreCase("memberJoinRoleId") && split.length == 4){
+						setMemberJoinRoleByID(split[3]);
+					}
+					else if(split[2].equalsIgnoreCase("channelIdforCreateRoom") && split.length == 4) {
+						setChannelIDforCreateRoom(split[3]);
+					}
+					else if(split[2].equalsIgnoreCase("categoryIdforNewRoom") && split.length == 4) {
+						setCategoryIdforNewRoom(split[3]);
+					}
+					else {
+						getSetCMD();
+					}
 				}
 			}else {
-				//getHelp();
+				getHelp();
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -138,7 +137,7 @@ public final class CommandBot {
 		Utils.loadProperties();
 		String oldtokenID = Discord.properties.getProperty("tokenId");
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -149,7 +148,7 @@ public final class CommandBot {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();
@@ -161,7 +160,7 @@ public final class CommandBot {
 		Utils.loadProperties();
 		String oldRoleID = Discord.properties.getProperty("roleId");
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -172,7 +171,7 @@ public final class CommandBot {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();
@@ -185,7 +184,7 @@ public final class CommandBot {
 		Utils.loadProperties();
 		String oldRoleID = Discord.properties.getProperty("channelIdforCreateRoom");
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -196,7 +195,7 @@ public final class CommandBot {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();
@@ -208,7 +207,7 @@ public final class CommandBot {
 		Utils.loadProperties();
 		String oldRoleID = Discord.properties.getProperty("categoryIdforNewRoom");
 		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.getConfigFile.get()));
+		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		
@@ -219,7 +218,7 @@ public final class CommandBot {
 		
 		reader.close();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.getConfigFile.get()));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
 		writer.write(builder.toString());
 		
 		writer.close();

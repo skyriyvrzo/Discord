@@ -7,7 +7,7 @@ import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.gui.logs.Log;
 import xyz.cuddlecloud.discord.util.Reference;
 import xyz.cuddlecloud.discord.util.Utils;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -22,9 +22,9 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		//Log.setMessage(LogUtil.event(event, event, null, false));
 		
 		try {
-			Discord.properties.load(new FileReader(Reference.getConfigFile.get()));
+			Discord.properties.load(new FileReader(Reference.configFile.get()));
 		} catch (IOException e) {
-			Log.setMessage(Discord.loggy.log(Level.INFO, "onGuildMemberJoin", GuildMemberJoinEventListener.class.getSimpleName(), e));
+			Log.setMessage(Discord.loggy.log(Level.INFO, e));
 		}
 		
 		String roldID = Discord.properties.getProperty("roleID");
@@ -32,7 +32,7 @@ public final class GuildMemberJoinEventListener extends ListenerAdapter{
 		try {
 			event.getGuild().addRoleToMember(event.getMember().getUser(), event.getGuild().getRoleById(roldID)).queue();
 		}catch(Exception e) {
-			Log.setMessage(Discord.loggy.log(Level.INFO, "onGuildMemberJoin", GuildMemberJoinEventListener.class.getSimpleName(), e));
+			Log.setMessage(Discord.loggy.log(Level.INFO, e));
 		}
 	}
 }

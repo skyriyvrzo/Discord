@@ -20,7 +20,7 @@ import xyz.cuddlecloud.discord.gui.stats.StatsMainPanel;
 import xyz.cuddlecloud.discord.gui.stats.performance.Performance;
 import xyz.cuddlecloud.discord.gui.util.Theme;
 import xyz.cuddlecloud.discord.util.Reference;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 public class GraphicalUserInterface {
 
@@ -38,7 +38,7 @@ private static JFrame frame = new JFrame("Discord (" + Reference.VERSIONS + ")")
 		frame.getContentPane().add(new LogMainPanel());
 		frame.getContentPane().add(new CommandBox());
 
-		icon = new ImageIcon(Reference.getImagesFolder.get() + "discord.png");
+		icon = new ImageIcon(Reference.imagesFolder.get() + "discord.png");
 		frame.setIconImage(icon.getImage());
 		
 		TrayIcon tri = new TrayIcon(icon.getImage(), Reference.VERSIONS);

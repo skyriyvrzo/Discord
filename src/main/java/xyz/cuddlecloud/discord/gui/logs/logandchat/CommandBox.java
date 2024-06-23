@@ -15,9 +15,11 @@ import javax.swing.border.Border;
 
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.command.CommandBot;
-import xyz.cuddlecloud.discord.gui.commands.RegisterCommand;
+import xyz.cuddlecloud.discord.command.CommandExit;
+import xyz.cuddlecloud.discord.command.CommandHelp;
+import xyz.cuddlecloud.discord.command.CommandOpen;
 import xyz.cuddlecloud.discord.gui.util.Theme;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 import xyz.cuddlecloud.discord.gui.logs.Log;
 
 public final class CommandBox extends JPanel implements KeyListener {
@@ -92,10 +94,10 @@ public final class CommandBox extends JPanel implements KeyListener {
 				command_location = commandList.size();
 			}
 			
-			if(tf.getText().equalsIgnoreCase("help") || tf.getText().equalsIgnoreCase("?")) {
-				CommandBot.getHelp();
+			if(tf.getText().trim().equalsIgnoreCase("help") || tf.getText().trim().equalsIgnoreCase("?")) {
+				CommandHelp.sendHelp();
 			}
-			else if(tf.getText().contains("bot")) {
+			else if(split[0].equalsIgnoreCase("bot")) {
 				try {
 					//System.out.println("run conditional");
 					CommandBot.conditional(tf, split);
@@ -104,9 +106,13 @@ public final class CommandBox extends JPanel implements KeyListener {
 					Log.setMessage(Discord.loggy.log(Level.ERROR, CommandBox.class.getSimpleName(), e1.getClass().getSimpleName(), e1));
 				}
 			}
-			
+
+			else if(split[0].equalsIgnoreCase("open")) {
+				CommandOpen.conditional(tf, split);
+            }
+
 			else if(tf.getText().equalsIgnoreCase("close") || tf.getText().equalsIgnoreCase("exit")) {
-				RegisterCommand.exit.run();
+				CommandExit.exit();
 			}
 			
 			else {

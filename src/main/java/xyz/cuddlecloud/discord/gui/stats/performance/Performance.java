@@ -9,14 +9,15 @@ import javax.swing.JTextArea;
 
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.gui.util.Theme;
-import com.get.lib.Logging.Loggy.Level;
-import com.get.lib.colorlib.ColorLib;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.ComputerSystem;
 import oshi.hardware.GraphicsCard;
 import oshi.hardware.HardwareAbstractionLayer;
+
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
+import xyz.cuddlecloud.javax.colorlib.ColorLib;
 
 public final class Performance extends JTextArea {
 

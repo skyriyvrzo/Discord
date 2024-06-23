@@ -4,7 +4,7 @@ import javax.swing.JTextField;
 
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.gui.logs.Log;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 public final class CommandException {
 

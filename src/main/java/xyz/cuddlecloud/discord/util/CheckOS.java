@@ -15,14 +15,14 @@ public final class CheckOS {
 		if(System.getProperty("os.name").contains("Windows")) {
 			osType = "windows";
 			directory = "C:\\Users\\"+System.getProperty("user.name")+"\\AppData\\Roaming\\DiscordBot";
-			jarPath = new File(Reference.getClassPath.get()).getCanonicalPath() + "\\Discord-" + Reference.VERSIONS + ".jar";
+			jarPath = new File(Reference.classPath.get()).getCanonicalPath() + "\\Discord-" + Reference.VERSIONS + ".jar";
 			configFile = directory + "\\config.properties";
 			imagesFolder = directory + "\\resources\\assets\\images\\";
 		}
 		else if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
 			osType = "linux";
 			directory = "/home/" + System.getProperty("user.name") + "/Documents/DiscordBot";
-			jarPath = new File(Reference.getClassPath.get()).getCanonicalPath() + "/Discord-" + Reference.VERSIONS + ".jar";
+			jarPath = new File(Reference.classPath.get()).getCanonicalPath() + "/Discord-" + Reference.VERSIONS + ".jar";
 			configFile = directory + "/config.properties";
 			imagesFolder = directory + "/resources/assets/images/";
 		}

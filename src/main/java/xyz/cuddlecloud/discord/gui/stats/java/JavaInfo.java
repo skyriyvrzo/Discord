@@ -6,7 +6,7 @@ import javax.swing.JTextArea;
 
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.gui.util.Theme;
-import com.get.lib.Logging.Loggy.Level;
+import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 public final class JavaInfo extends JTextArea {
 
