@@ -11,7 +11,6 @@ import xyz.cuddlecloud.discord.util.Reference;
 import xyz.cuddlecloud.javax.logging.Loggy;
 
 import java.io.*;
-import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,8 +38,8 @@ public final class ConfigFile {
 
         j3.put("roldId", "{roldId}");
 
-        j4.put("categoryIdForCreateRoom", "{categoryIdForCreateRoom}");
         j4.put("channelIdForCreateRoom", "{channelIdForCreateRoom}");
+        j4.put("categoryIdForCreateRoom", "{categoryIdForCreateRoom}");
 
         ja = new JSONArray();
         ja.add(j1);
@@ -81,10 +80,6 @@ public final class ConfigFile {
         String prettyJsonString = gson.toJson(ja);
 
         File file = new File(Reference.directory.get() + "\\config.json");
-        //File oldFile = new File(Reference.directory.get() + "\\config.json.old");
-        /*if(oldFile.delete()) {
-            Discord.loggy.log(Loggy.Level.TRACE, oldFile + " removed");
-        }*/
 
         if(file.renameTo(new File(Reference.directory.get() + "\\config.json.old"))) {
             Discord.loggy.log(Loggy.Level.TRACE, file + " rename success.");
