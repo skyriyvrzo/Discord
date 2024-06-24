@@ -51,7 +51,7 @@ public final class CommandBot {
 					else if(split[2].equalsIgnoreCase("botToken") && split.length == 4) {
 						ConfigFile.setBotToken(split[3]);
 					}
-					else if(split[2].equalsIgnoreCase("memberJoinRoleId") && split.length == 4){
+					else if(split[2].equalsIgnoreCase("memberJoinRoleId") && split.length == 4) {
 						ConfigFile.setRoleId(split[3]);
 					}
 					else if(split[2].equalsIgnoreCase("channelIdForCreateRoom") && split.length == 4) {
@@ -60,8 +60,23 @@ public final class CommandBot {
 					else if(split[2].equalsIgnoreCase("categoryIdForCreateRoom") && split.length == 4) {
 						ConfigFile.setCategoryIdForCreateRoom(split[3]);
 					}
-					else if(split[2].equalsIgnoreCase("activity") && split.length == 4) {
-						ConfigFile.setActivity(split[3]);
+					else if(split[2].equalsIgnoreCase("activity") && split.length >= 4) {
+
+						/**
+						 *
+						 *  x = 54
+						 *  x + y = 108
+						 *  54 + y = 108
+						 *  y = 108-54
+						 *  y = 54
+						 *
+						 */
+
+						String s = "";
+						for(int i = 3; i < split.length; i++) {
+							s += split[i] + " ";
+						}
+						ConfigFile.setActivity(s.trim());
 					}
 					else {
 						getSetCMD();
