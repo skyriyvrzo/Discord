@@ -1,4 +1,4 @@
-package xyz.cuddlecloud.discord.bot.events;
+package xyz.cuddlecloud.discord.bot.listener;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.bot.JavaDiscordAPI;
 import xyz.cuddlecloud.discord.gui.logs.Log;
+import xyz.cuddlecloud.discord.json.ConfigFile;
 import xyz.cuddlecloud.javax.logging.Loggy.Level;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -15,7 +16,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class GuildVoiceUpdateEventListener extends ListenerAdapter {
+public final class GuildVoiceUpdateListener extends ListenerAdapter {
 
 	static Guild guild;
 	static Map<String, String> channelId = new ConcurrentHashMap<>();
@@ -78,10 +79,10 @@ public class GuildVoiceUpdateEventListener extends ListenerAdapter {
 			 */
 			if(!isShutdown) return;
 			assert guild != null;
-			Category category = guild.getCategoryById(Discord.properties.getProperty("categoryIdForCreateRoom"));
+			Category category = guild.getCategoryById(ConfigFile.getCategoryIdForCreateRoom());
 			Member member = event.getMember();
 
-			if (event.getChannelJoined().getId().equals(Discord.properties.getProperty("channelIdForCreateRoom").trim())) {
+			if (event.getChannelJoined().getId().equals(ConfigFile.getChannelIdForCreateRoom())) {
 				assert category != null;
 				String name = event.getMember().getEffectiveName().isEmpty() ? "null" : event.getMember().getEffectiveName();
 				category.createVoiceChannel(name).queue(voiceChannel -> {

@@ -7,6 +7,7 @@ import java.util.Random;
 
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.gui.logs.Log;
+import xyz.cuddlecloud.discord.json.ConfigFile;
 import xyz.cuddlecloud.discord.util.Reference;
 import xyz.cuddlecloud.discord.util.Utils;
 import xyz.cuddlecloud.javax.logging.Loggy.Level;
@@ -35,10 +36,11 @@ public final class Discord4J {
 	private static Snowflake guildID;
 	private static ArrayList<Snowflake> voiceChannelIDList = new ArrayList<>();
 	public DiscordClient client;
-	
+
+	@Deprecated
 	public Discord4J() {
 		Utils.loadProperties();
-		client = DiscordClient.create((Discord.properties.getProperty("tokenId") != null) ? Discord.properties.getProperty("tokenId").trim() : "");
+		client = DiscordClient.create(ConfigFile.getBotToken());
 		
 		@SuppressWarnings("deprecation")
 		Mono<Void> login = client.withGateway((GatewayDiscordClient gateway) -> {
@@ -80,10 +82,10 @@ public final class Discord4J {
 				Mono<Guild> guildMono = event.getClient().getGuildById(guildID);
 				if(!voiceState.getData().channelId().isEmpty()) {
 					Utils.loadProperties();
-					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(Discord.properties.getProperty("channelIdForCreateRoom"))) {
+					if(voiceState.getData().channelId().get().toString().equalsIgnoreCase(ConfigFile.getChannelIdForCreateRoom())) {
 					guildMono.flatMap(guild -> {
 							return guild.createVoiceChannel(spec -> {
-							spec.setParentId(Snowflake.of(Discord.properties.getProperty("categoryIdForCreateRoom")));
+							spec.setParentId(Snowflake.of(ConfigFile.getCategoryIdForCreateRoom()));
 							spec.setName(globalName.get());
 						});
 					  }).subscribe(voiceChannel -> {

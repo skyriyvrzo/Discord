@@ -1,9 +1,5 @@
 package xyz.cuddlecloud.discord.util;
 
-import xyz.cuddlecloud.discord.Discord;
-import xyz.cuddlecloud.discord.gui.logs.Log;
-import xyz.cuddlecloud.javax.logging.Loggy;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -15,9 +11,15 @@ import java.util.jar.JarFile;
 
 public class UnpackAssets {
 
-	private static String directory = Reference.directory.get();
-	
+	private static final String directory = Reference.directory.get();
+
 	public static void extractFile() throws IOException {
+		//writeConfig();
+		extractAssets();
+	}
+
+	@Deprecated
+	public static void writeConfig() throws IOException {
 		
 		File dir = new File(Reference.directory.get());
 		dir.mkdirs();
@@ -38,34 +40,36 @@ public class UnpackAssets {
     		writer.write("channelIdForCreateRoom: {channel_id}");
     		writer.close();
     	}
-		
+	}
+
+	public static void extractAssets() {
 		try {
 			JarFile jarfile = new JarFile(Reference.jarPath.get());
 			Enumeration<JarEntry> enu = jarfile.entries();
-		
+
 			while(enu.hasMoreElements()) {
 				String targetDir = directory;
 				JarEntry je = enu.nextElement();
 
 				if(je.getName().contains("assets")) {
-										
+
 					File fl = new File(targetDir, je.getName());
 					if(!fl.exists()) {
 						fl.getParentFile().mkdirs();
 						fl = new File(targetDir, je.getName());
 					}
-					
+
 					if(je.isDirectory()) {
 						continue;
 					}
-					
+
 					InputStream is = jarfile.getInputStream(je);
 					FileOutputStream fo = new FileOutputStream(fl);
-					
+
 					while(is.available() > 0) {
 						fo.write(is.read());
 					}
-					
+
 					fo.close();
 					is.close();
 				}

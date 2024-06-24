@@ -2,8 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>xyz.cuddlecloud.discord</groupId>
   <artifactId>Discord</artifactId>
-  <version>1.5.5</version>
-  
+  <version>1.5.6</version>
+
   <dependencies>
   	<dependency>
     	<groupId>net.dv8tion</groupId>
@@ -45,6 +45,12 @@
           <groupId>xyz.cuddlecloud.javax.colorlib</groupId>
           <artifactId>color-lib</artifactId>
           <version>2.0</version>
+      </dependency>
+
+      <dependency>
+          <groupId>com.googlecode.json-simple</groupId>
+          <artifactId>json-simple</artifactId>
+          <version>1.1.1</version>
       </dependency>
   </dependencies>
     <build>

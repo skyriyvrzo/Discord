@@ -16,8 +16,10 @@ public final class CommandOpen {
         if(s[0].equalsIgnoreCase("open")){
             if(tf.getText().trim().equalsIgnoreCase("open")){
                 getOpenCMD();
-            }else if(s[1].equalsIgnoreCase("fileconfig")) {
-                openFileConfig();
+            }else if(s[1].equalsIgnoreCase("configFile")) {
+                openConfigFile();
+            }else {
+                getOpenCMD();
             }
         }else {
             getOpenCMD();
@@ -26,11 +28,11 @@ public final class CommandOpen {
 
     private static void getOpenCMD() {
         Log.setMessage(Discord.loggy.log(Loggy.Level.INFO, "------ Help Open ------"));
-        Log.setMessage(Discord.loggy.log(Loggy.Level.INFO, "- open fileconfig"));
+        Log.setMessage(Discord.loggy.log(Loggy.Level.INFO, "- open configFile"));
         Log.setMessage(Discord.loggy.log(Loggy.Level.INFO, "------------------------"));
     }
 
-    private static void openFileConfig() {
+    private static void openConfigFile() {
         Desktop desktop = Desktop.getDesktop();
         try {
             desktop.open(new File(Reference.configFile.get()));

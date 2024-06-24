@@ -9,13 +9,10 @@ import javax.swing.JTextField;
 import xyz.cuddlecloud.discord.Discord;
 import xyz.cuddlecloud.discord.bot.Discord4J;
 import xyz.cuddlecloud.discord.gui.logs.Log;
-import xyz.cuddlecloud.discord.util.Reference;
-import xyz.cuddlecloud.discord.util.Utils;
+import xyz.cuddlecloud.discord.json.ConfigFile;
 import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
 public final class CommandBot {
-
-	//private static String role_id;
 	
 	public static void conditional(JTextField tf, String[] split) throws IOException {
 		
@@ -32,10 +29,10 @@ public final class CommandBot {
 						getMemberJoinRoleID();
 					}
 					else if(tf.getText().equalsIgnoreCase("bot get channelIdForCreateRoom")) {
-						getchannelIdForCreateRoom();
+						getChannelIdForCreateRoom();
 					}
 					else if(tf.getText().equalsIgnoreCase("bot get categoryIdForCreateRoom")) {
-						getcategoryIdForCreateRoom();
+						getCategoryIdForCreateRoom();
 					}
 					else if(tf.getText().equalsIgnoreCase("bot get channelIdList")) {
 						Discord4J.getChannelIdList();
@@ -49,16 +46,16 @@ public final class CommandBot {
 						getSetCMD();
 					}
 					else if(split[2].equalsIgnoreCase("botToken") && split.length == 4) {
-						setBotToken(split[3]);
+						ConfigFile.setBotToken(split[3]);
 					}
 					else if(split[2].equalsIgnoreCase("memberJoinRoleId") && split.length == 4){
-						setMemberJoinRoleByID(split[3]);
+						ConfigFile.setRoleId(split[3]);
 					}
 					else if(split[2].equalsIgnoreCase("channelIdForCreateRoom") && split.length == 4) {
-						setchannelIdForCreateRoom(split[3]);
+						ConfigFile.setChannelIdForCreateRoom(split[3]);
 					}
 					else if(split[2].equalsIgnoreCase("categoryIdForCreateRoom") && split.length == 4) {
-						setcategoryIdForCreateRoom(split[3]);
+						ConfigFile.setCategoryIdForCreateRoom(split[3]);
 					}
 					else {
 						getSetCMD();
@@ -99,7 +96,7 @@ public final class CommandBot {
 	}
 	
 	private static void getBotToken() throws FileNotFoundException, IOException {
-		String botToken = Discord.properties.getProperty("tokenId");
+		String botToken = ConfigFile.getBotToken();
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(botToken), null);
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Bot Token: " + botToken));
@@ -107,122 +104,26 @@ public final class CommandBot {
 	}
 	
 	private static void getMemberJoinRoleID() throws FileNotFoundException, IOException {
-		Utils.loadProperties();
-		String memberJoinRoleID = Discord.properties.getProperty("roleId");
+		String memberJoinRoleID = ConfigFile.getRoleId();
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(memberJoinRoleID), null);
 		Log.setMessage(Discord.loggy.log(Level.INFO, "RoleID: " + memberJoinRoleID));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
-	private static void getchannelIdForCreateRoom() {
-		Utils.loadProperties();
-		String channelIdForCreateRoom = Discord.properties.getProperty("channelIdForCreateRoom");
+	private static void getChannelIdForCreateRoom() {
+		String channelIdForCreateRoom = ConfigFile.getChannelIdForCreateRoom();
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(channelIdForCreateRoom), null);
 		Log.setMessage(Discord.loggy.log(Level.INFO, "channelIdForCreateRoom: " + channelIdForCreateRoom));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 	
-	private static void getcategoryIdForCreateRoom() {
-		Utils.loadProperties();
-		String categoryIdForCreateRoom = Discord.properties.getProperty("categoryIdForCreateRoom");
+	private static void getCategoryIdForCreateRoom() {
+		String categoryIdForCreateRoom = ConfigFile.getCategoryIdForCreateRoom();
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(categoryIdForCreateRoom), null);
 		Log.setMessage(Discord.loggy.log(Level.INFO, "RoleID: " + categoryIdForCreateRoom));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
-	}
-	
-	private static void setBotToken(String id) throws FileNotFoundException, IOException {
-		Utils.loadProperties();
-		String oldtokenID = Discord.properties.getProperty("tokenId");
-		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
-		StringBuilder builder = new StringBuilder();
-		String line;
-		
-		while((line = reader.readLine()) != null) {
-			line = line.replace(oldtokenID, id);
-			builder.append(line).append(System.lineSeparator());
-		}
-		
-		reader.close();
-		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
-		writer.write(builder.toString());
-		
-		writer.close();
-		
-		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
-	}
-	
-	private static void setMemberJoinRoleByID(String id) throws IOException {
-		Utils.loadProperties();
-		String oldRoleID = Discord.properties.getProperty("roleId");
-		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
-		StringBuilder builder = new StringBuilder();
-		String line;
-		
-		while((line = reader.readLine()) != null) {
-			line = line.replace(oldRoleID, id);
-			builder.append(line).append(System.lineSeparator());
-		}
-		
-		reader.close();
-		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
-		writer.write(builder.toString());
-		
-		writer.close();
-		
-		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
-		//Bot.buildBot();
-	}
-	
-	private static void setchannelIdForCreateRoom(String id) throws FileNotFoundException, IOException {
-		Utils.loadProperties();
-		String oldRoleID = Discord.properties.getProperty("channelIdForCreateRoom");
-		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
-		StringBuilder builder = new StringBuilder();
-		String line;
-		
-		while((line = reader.readLine()) != null) {
-			line = line.replace(oldRoleID, id);
-			builder.append(line).append(System.lineSeparator());
-		}
-		
-		reader.close();
-		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
-		writer.write(builder.toString());
-		
-		writer.close();
-		
-		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
-	}
-	
-	private static void setcategoryIdForCreateRoom(String id) throws FileNotFoundException, IOException {
-		Utils.loadProperties();
-		String oldRoleID = Discord.properties.getProperty("categoryIdForCreateRoom");
-		
-		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));
-		StringBuilder builder = new StringBuilder();
-		String line;
-		
-		while((line = reader.readLine()) != null) {
-			line = line.replace(oldRoleID, id);
-			builder.append(line).append(System.lineSeparator());
-		}
-		
-		reader.close();
-		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(Reference.configFile.get()));
-		writer.write(builder.toString());
-		
-		writer.close();
-		
-		Log.setMessage(Discord.loggy.log(Level.INFO, "Please restart program."));
 	}
 }

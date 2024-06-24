@@ -1,16 +1,16 @@
 package xyz.cuddlecloud.discord.bot;
 
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
 import xyz.cuddlecloud.discord.Discord;
-import xyz.cuddlecloud.discord.bot.events.GuildMemberJoinEventListener;
-import xyz.cuddlecloud.discord.bot.events.GuildVoiceUpdateEventListener;
-import xyz.cuddlecloud.discord.bot.events.ReadyEventListener;
+import xyz.cuddlecloud.discord.bot.listener.GuildMemberJoinListener;
+import xyz.cuddlecloud.discord.bot.listener.GuildVoiceUpdateListener;
+import xyz.cuddlecloud.discord.bot.listener.ReadyListener;
 
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import xyz.cuddlecloud.discord.bot.listener.ShutdownListener;
+import xyz.cuddlecloud.discord.json.ConfigFile;
 
 public final class JavaDiscordAPI {
 	
@@ -22,22 +22,21 @@ public final class JavaDiscordAPI {
 	
 	public static void runBot() {
 		
-		String botToken = (Discord.properties.getProperty("tokenId") != null) ? Discord.properties.getProperty("tokenId").trim() : "";
-		//String botToken = "MTIwNzMxNDY2NjY0MTAzNTI5NA.GuzQNY.p01Aty4m86D_AeDXjZKYm-07CbbsnnDAMWoHUU";
-		
-		//System.out.println(botToken);
+		String botToken = ConfigFile.getBotToken();
+
 		jdaBuilder = JDABuilder.createDefault(botToken);
 
 		jdaBuilder.setActivity(Activity.customStatus("Seeing ʟᴏʙʙʏ"))
-		.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT)
-		.addEventListeners(new ReadyEventListener())
-		.addEventListeners(new GuildMemberJoinEventListener())
-		.addEventListeners(new GuildVoiceUpdateEventListener());
+				.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT)
+				.addEventListeners(new ReadyListener())
+				.addEventListeners(new GuildMemberJoinListener())
+				.addEventListeners(new GuildVoiceUpdateListener())
+				.addEventListeners(new ShutdownListener());
 
 		worker1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				GuildVoiceUpdateEventListener.randomRemoveChannelByWorker();
+				GuildVoiceUpdateListener.randomRemoveChannelByWorker();
 			}
 		});
 		//worker1.start();

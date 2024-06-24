@@ -8,12 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import xyz.cuddlecloud.discord.Discord;
+import xyz.cuddlecloud.discord.json.ConfigFile;
 
+@Deprecated
 public final class CheckVersion {
 
 	public static void changeVersionFile() throws FileNotFoundException, IOException {
-		Discord.properties.load(new FileReader(Reference.configFile.get()));
-		String configFileVersion = Discord.properties.getProperty("version");
+		String configFileVersion = ConfigFile.getVersion();
 		String currentVersion = Reference.VERSIONS;
 		
 		BufferedReader reader = new BufferedReader(new FileReader(Reference.configFile.get()));

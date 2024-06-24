@@ -22,13 +22,13 @@ import xyz.cuddlecloud.discord.gui.util.Theme;
 import xyz.cuddlecloud.discord.util.Reference;
 import xyz.cuddlecloud.javax.logging.Loggy.Level;
 
-public class GraphicalUserInterface {
+public class MainGUI {
 
 private static JFrame frame = new JFrame("Discord (" + Reference.VERSIONS + ")");
 		
 	private static ImageIcon icon = null;
 	
-	public GraphicalUserInterface(String s) throws IOException {
+	public MainGUI(String[] args) throws IOException {
 		
 		frame.setSize(870,520);
 		frame.getContentPane().setBackground(Theme.DisplayBackground);
@@ -43,24 +43,20 @@ private static JFrame frame = new JFrame("Discord (" + Reference.VERSIONS + ")")
 		
 		TrayIcon tri = new TrayIcon(icon.getImage(), Reference.VERSIONS);
 		tri.setImageAutoSize(true);
-		
-		tri.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(true);
-				
-				try {
-					SystemTray.getSystemTray().remove(tri);
-				}catch(Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		
+
+		tri.addActionListener(e -> {
+            frame.setVisible(true);
+
+            try {
+                SystemTray.getSystemTray().remove(tri);
+            }catch(Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+
 		frame.addWindowListener(new WindowListener() {
-			
-			
+
+
 			@Override
 			public void windowClosing(WindowEvent e) {
 				try {
@@ -109,25 +105,18 @@ private static JFrame frame = new JFrame("Discord (" + Reference.VERSIONS + ")")
 			}
 		});
 		
-		//frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		
-		if(!s.equalsIgnoreCase("nogui")) frame.setVisible(true);
-		
-		//Log.setMessage(loggy.log(Level.INFO, "For help, type \"help\" or \"?\""));
-		
-		//setDelay();
+
+		if(args.length > 0) {
+			if(args[0].equalsIgnoreCase("--nogui") || args[0].equalsIgnoreCase("nogui")) frame.setVisible(false);
+		}else{
+			frame.setVisible(true);
+		}
+
 		Thread setStats = new Thread(() -> {
-			Discord.loggy.log(Level.TRACE, "setDelay enabled.");
-			
 			while(true) {
 				Performance.setText();
-				/*try {
-					Thread.sleep(1000);
-				}catch(Exception  e) {
-					Log.getLogger(log.getError(Display.class, e.getMessage()));
-				}*/
 			}
 		});
 		setStats.start();
