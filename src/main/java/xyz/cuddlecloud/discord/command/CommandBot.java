@@ -37,6 +37,9 @@ public final class CommandBot {
 					else if(tf.getText().equalsIgnoreCase("bot get channelIdList")) {
 						Discord4J.getChannelIdList();
 					}
+					else if(tf.getText().equalsIgnoreCase("bot get activity")) {
+						getActivity();
+					}
 					else {
 						getGetCMD();
 					}
@@ -56,6 +59,9 @@ public final class CommandBot {
 					}
 					else if(split[2].equalsIgnoreCase("categoryIdForCreateRoom") && split.length == 4) {
 						ConfigFile.setCategoryIdForCreateRoom(split[3]);
+					}
+					else if(split[2].equalsIgnoreCase("activity") && split.length == 4) {
+						ConfigFile.setActivity(split[3]);
 					}
 					else {
 						getSetCMD();
@@ -79,19 +85,21 @@ public final class CommandBot {
 	
 	private static void getGetCMD() {
 		Log.setMessage(Discord.loggy.log(Level.INFO, "------ Help Bot ------"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get activity"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get botToken"));
-		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get memberJoinRoleId"));
-		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get channelIdForCreateRoom"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get categoryIdForCreateRoom"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get channelIdForCreateRoom"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot get memberJoinRoleId"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "------------------------"));
 	}
 	
 	private static void getSetCMD() {
 		Log.setMessage(Discord.loggy.log(Level.INFO, "------ Help Bot ------"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set activity <activity>"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set botToken <botToken>"));
-		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set memberJoinRoleId <role_id>"));
-		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set channelIdForCreateRoom <channel_id>"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set categoryIdForCreateRoom <category_id>"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set channelIdForCreateRoom <channel_id>"));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "- bot set memberJoinRoleId <role_id>"));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "------------------------"));
 	}
 	
@@ -124,6 +132,14 @@ public final class CommandBot {
 		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(categoryIdForCreateRoom), null);
 		Log.setMessage(Discord.loggy.log(Level.INFO, "RoleID: " + categoryIdForCreateRoom));
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
+	}
+
+	private static void getActivity() {
+		String activity = ConfigFile.getActivity();
+
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(activity), null);
+		Log.setMessage(Discord.loggy.log(Level.INFO, "Activity: " + activity));
 		Log.setMessage(Discord.loggy.log(Level.INFO, "Copied to clipboard"));
 	}
 }

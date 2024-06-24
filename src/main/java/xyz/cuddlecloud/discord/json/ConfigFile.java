@@ -21,6 +21,8 @@ public final class ConfigFile {
     private static final JSONObject j2 = new JSONObject();
     private static final JSONObject j3 = new JSONObject();
     private static final JSONObject j4 = new JSONObject();
+    private static final JSONObject j5 = new JSONObject();
+
     private static JSONArray ja;
 
     private ConfigFile() {}
@@ -36,22 +38,26 @@ public final class ConfigFile {
 
         j2.put("botToken", "{botToken}");
 
-        j3.put("roldId", "{roldId}");
+        j3.put("roleId", "{roleId}");
 
         j4.put("channelIdForCreateRoom", "{channelIdForCreateRoom}");
         j4.put("categoryIdForCreateRoom", "{categoryIdForCreateRoom}");
 
+        j5.put("activity", "Playing {activity}");
+
         ja = new JSONArray();
         ja.add(j1);
+        ja.add(j5);
         ja.add(j2);
         ja.add(j3);
         ja.add(j4);
 
         jsonMap.put("version", Reference.VERSIONS);
         jsonMap.put("botToken", "{botToken}");
-        jsonMap.put("roldId", "{roldId}");
+        jsonMap.put("roleId", "{roleId}");
         jsonMap.put("categoryIdForCreateRoom", "{categoryIdForCreateRoom}");
         jsonMap.put("channelIdForCreateRoom", "{channelIdForCreateRoom}");
+        jsonMap.put("activity", "Playing {activity}");
 
         writeFile();
     }
@@ -61,13 +67,16 @@ public final class ConfigFile {
 
         j2.put("botToken", getBotToken());
 
-        j3.put("roldId", getRoleId());
+        j3.put("roleId", getRoleId());
 
-        j4.put("categoryIdForCreateRoom", getCategoryIdForCreateRoom());
         j4.put("channelIdForCreateRoom", getChannelIdForCreateRoom());
+        j4.put("categoryIdForCreateRoom", getCategoryIdForCreateRoom());
+
+        j5.put("activity", getActivity());
 
         ja = new JSONArray();
         ja.add(j1);
+        ja.add(j5);
         ja.add(j2);
         ja.add(j3);
         ja.add(j4);
@@ -141,13 +150,17 @@ public final class ConfigFile {
         return jsonMap.get("categoryIdForCreateRoom");
     }
 
+    public static String getActivity() {
+        return jsonMap.get("activity");
+    }
+
     public static void setBotToken(String s) {
         jsonMap.put("botToken", s);
         setOldDataForJsonObject();
     }
 
     public static void setRoleId(String s) {
-        jsonMap.put("roldId", s);
+        jsonMap.put("roleId", s);
         setOldDataForJsonObject();
     }
 
@@ -158,6 +171,11 @@ public final class ConfigFile {
 
     public static void setCategoryIdForCreateRoom(String s) {
         jsonMap.put("categoryIdForCreateRoom", s);
+        setOldDataForJsonObject();
+    }
+
+    public static void setActivity(String s) {
+        jsonMap.put("activity", s);
         setOldDataForJsonObject();
     }
 }

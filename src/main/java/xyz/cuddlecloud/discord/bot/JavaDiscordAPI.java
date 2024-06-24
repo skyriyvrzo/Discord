@@ -26,7 +26,7 @@ public final class JavaDiscordAPI {
 
 		jdaBuilder = JDABuilder.createDefault(botToken);
 
-		jdaBuilder.setActivity(Activity.customStatus("Seeing ʟᴏʙʙʏ"))
+		jdaBuilder.setActivity(Activity.customStatus(ConfigFile.getActivity()))
 				.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT)
 				.addEventListeners(new ReadyListener())
 				.addEventListeners(new GuildMemberJoinListener())
