@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import xyz.cuddlecloud.discord.Discord;
+import xyz.cuddlecloud.discord.gui.logs.Log;
 import xyz.cuddlecloud.discord.util.Reference;
 import xyz.cuddlecloud.javax.logging.Loggy;
 
@@ -29,7 +30,7 @@ public final class ConfigFile {
 
     public static void setup() {
         readFile();
-        System.out.println(Reference.VERSIONS + " : " + getVersion());
+        Discord.loggy.log(Loggy.Level.TRACE, (Reference.VERSIONS + " : " + getVersion()));
         if(!(isVersionEqual())) setOldDataForJsonObject();
     }
 
@@ -89,8 +90,15 @@ public final class ConfigFile {
         String prettyJsonString = gson.toJson(ja);
 
         File file = new File(Reference.directory.get() + "\\config.json");
+        File oldFile = new File(Reference.directory.get() + "\\config.json.old");
 
-        if(file.renameTo(new File(Reference.directory.get() + "\\config.json.old"))) {
+        /*if(oldFile.delete()) {
+            Discord.loggy.log(Loggy.Level.TRACE, oldFile + " removed");
+        }else {
+            Discord.loggy.log(Loggy.Level.TRACE, oldFile + " cant' remove");
+        }*/
+
+        if(file.renameTo(oldFile)) {
             Discord.loggy.log(Loggy.Level.TRACE, file + " rename success.");
         }else {
             Discord.loggy.log(Loggy.Level.TRACE, file + " can't rename");
@@ -100,9 +108,9 @@ public final class ConfigFile {
             wr.write(prettyJsonString);
             wr.flush();
         }catch (FileNotFoundException e){
-            e.printStackTrace();
+            Discord.loggy.log(Loggy.Level.ERROR, ConfigFile.class.getSimpleName(), e.getClass().getSimpleName(), e);
         } catch (IOException e) {
-            e.printStackTrace();
+            Discord.loggy.log(Loggy.Level.ERROR, ConfigFile.class.getSimpleName(), e.getClass().getSimpleName(), e);
         }
     }
 
@@ -122,7 +130,7 @@ public final class ConfigFile {
         } catch (FileNotFoundException e) {
             setNewDataForJsonObject();
         } catch (IOException | ParseException e) {
-            throw new RuntimeException(e);
+            Discord.loggy.log(Loggy.Level.ERROR, ConfigFile.class.getSimpleName(), e.getClass().getSimpleName(), e);
         }
     }
 
@@ -131,27 +139,27 @@ public final class ConfigFile {
     }
 
     public static String getVersion() {
-        return jsonMap.get("version");
+        return jsonMap.get("version") == null ? "null" : jsonMap.get("version");
     }
 
     public static String getBotToken() {
-        return jsonMap.get("botToken");
+        return jsonMap.get("botToken") == null ? "null" : jsonMap.get("botToken");
     }
 
     public static String getRoleId() {
-        return jsonMap.get("roldId");
+        return jsonMap.get("roleId") == null ? "null" : jsonMap.get("roleId");
     }
 
     public static String getChannelIdForCreateRoom() {
-        return jsonMap.get("channelIdForCreateRoom");
+        return jsonMap.get("channelIdForCreateRoom") == null ? "null" : jsonMap.get("channelIdForCreateRoom");
     }
 
     public static String getCategoryIdForCreateRoom() {
-        return jsonMap.get("categoryIdForCreateRoom");
+        return jsonMap.get("categoryIdForCreateRoom") == null ? "null" : jsonMap.get("categoryIdForCreateRoom");
     }
 
     public static String getActivity() {
-        return jsonMap.get("activity");
+        return jsonMap.get("activity") == null ? "null" : jsonMap.get("activity");
     }
 
     public static void setBotToken(String s) {
