@@ -87,7 +87,7 @@ public final class ConfigFile {
 
             for(Map.Entry<String, ?> entry : jso.entrySet()) {
                 String keystr = entry.getKey();
-                String valueStr = entry.getValue().toString();
+                String valueStr = entry.getValue().toString().replace("\"", "");
                 jsonMap.put(keystr, valueStr);
             }
         } catch (FileNotFoundException e) {
