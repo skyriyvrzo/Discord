@@ -2,12 +2,9 @@ package xyz.cuddlecloud.discord.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import xyz.cuddlecloud.discord.Discord;
-import xyz.cuddlecloud.discord.gui.logs.Log;
 import xyz.cuddlecloud.discord.util.Reference;
 import xyz.cuddlecloud.javax.logging.Loggy;
 
@@ -18,13 +15,7 @@ import java.util.Map;
 public final class ConfigFile {
 
     private static final Map<String, String> jsonMap = new HashMap<>();
-    private static final JSONObject j1 = new JSONObject();
-    private static final JSONObject j2 = new JSONObject();
-    private static final JSONObject j3 = new JSONObject();
-    private static final JSONObject j4 = new JSONObject();
-    private static final JSONObject j5 = new JSONObject();
-
-    private static JSONArray ja;
+    private static final JsonObject jsonObject = new JsonObject();
 
     private ConfigFile() {}
 
@@ -35,23 +26,12 @@ public final class ConfigFile {
     }
 
     private static void setNewDataForJsonObject() {
-        j1.put("version", Reference.VERSIONS);
-
-        j2.put("botToken", "{botToken}");
-
-        j3.put("roleId", "{roleId}");
-
-        j4.put("channelIdForCreateRoom", "{channelIdForCreateRoom}");
-        j4.put("categoryIdForCreateRoom", "{categoryIdForCreateRoom}");
-
-        j5.put("activity", "Playing {activity}");
-
-        ja = new JSONArray();
-        ja.add(j1);
-        ja.add(j5);
-        ja.add(j2);
-        ja.add(j3);
-        ja.add(j4);
+        jsonObject.addProperty("version", Reference.VERSIONS);
+        jsonObject.addProperty("botToken", "{botToken}");
+        jsonObject.addProperty("roleId", "{roleId}");
+        jsonObject.addProperty("channelIdForCreateRoom", "{channelIdForCreateRoom}");
+        jsonObject.addProperty("categoryIdForCreateRoom", "{categoryIdForCreateRoom}");
+        jsonObject.addProperty("activity", "Playing {activity}");
 
         jsonMap.put("version", Reference.VERSIONS);
         jsonMap.put("botToken", "{botToken}");
@@ -64,31 +44,20 @@ public final class ConfigFile {
     }
 
     private static void setOldDataForJsonObject() {
-        j1.put("version", Reference.VERSIONS);
-
-        j2.put("botToken", getBotToken());
-
-        j3.put("roleId", getRoleId());
-
-        j4.put("channelIdForCreateRoom", getChannelIdForCreateRoom());
-        j4.put("categoryIdForCreateRoom", getCategoryIdForCreateRoom());
-
-        j5.put("activity", getActivity());
-
-        ja = new JSONArray();
-        ja.add(j1);
-        ja.add(j5);
-        ja.add(j2);
-        ja.add(j3);
-        ja.add(j4);
+        jsonObject.addProperty("version", Reference.VERSIONS);
+        jsonObject.addProperty("botToken", getBotToken());
+        jsonObject.addProperty("roleId", getRoleId());
+        jsonObject.addProperty("channelIdForCreateRoom", getChannelIdForCreateRoom());
+        jsonObject.addProperty("categoryIdForCreateRoom", getCategoryIdForCreateRoom());
+        jsonObject.addProperty("activity", getActivity());
 
         writeFile();
     }
 
     private static void writeFile() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String prettyJsonString = gson.toJson(ja);
-
+        String prettyJsonString = gson.toJson(jsonObject);
+        //System.out.println(prettyJsonString);
         File file = new File(Reference.directory.get() + "\\config.json");
         File oldFile = new File(Reference.directory.get() + "\\config.json.old");
 
@@ -107,29 +76,23 @@ public final class ConfigFile {
         try(FileWriter wr = new FileWriter(Reference.directory.get() + "\\config.json")) {
             wr.write(prettyJsonString);
             wr.flush();
-        }catch (FileNotFoundException e){
-            Discord.loggy.log(Loggy.Level.ERROR, ConfigFile.class.getSimpleName(), e.getClass().getSimpleName(), e);
         } catch (IOException e) {
             Discord.loggy.log(Loggy.Level.ERROR, ConfigFile.class.getSimpleName(), e.getClass().getSimpleName(), e);
         }
     }
 
     private static void readFile() {
-        JSONParser p = new JSONParser();
         try(FileReader r = new FileReader(Reference.directory.get() + "\\config.json")) {
-            JSONArray jsonArray = (JSONArray) p.parse(r);
+            JsonObject jso = JsonParser.parseReader(r).getAsJsonObject();
 
-            for(Object o : jsonArray) {
-                JSONObject jo = (JSONObject) o;
-                for(Object key : jo.keySet()) {
-                    String keyStr = (String) key;
-                    String valueStr = (String) jo.get(keyStr);
-                    jsonMap.put(keyStr, valueStr);
-                }
+            for(Map.Entry<String, ?> entry : jso.entrySet()) {
+                String keystr = entry.getKey();
+                String valueStr = entry.getValue().toString();
+                jsonMap.put(keystr, valueStr);
             }
         } catch (FileNotFoundException e) {
             setNewDataForJsonObject();
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             Discord.loggy.log(Loggy.Level.ERROR, ConfigFile.class.getSimpleName(), e.getClass().getSimpleName(), e);
         }
     }

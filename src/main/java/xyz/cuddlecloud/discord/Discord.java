@@ -1,7 +1,6 @@
 package xyz.cuddlecloud.discord;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import xyz.cuddlecloud.discord.gui.MainGUI;
 import xyz.cuddlecloud.discord.json.ConfigFile;

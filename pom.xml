@@ -32,7 +32,7 @@
       <dependency>
           <groupId>xyz.cuddlecloud.javax.logging</groupId>
           <artifactId>Loggy</artifactId>
-          <version>0.1.51</version>
+          <version>1.0</version>
       </dependency>
 
       <dependency>
