@@ -6,7 +6,7 @@ import xyz.cuddlecloud.discord.Discord;
 
 public final class Reference {
 
-	public static final String VERSIONS = "1.5.8a";
+	public static final String VERSIONS = "1.5.8dev";
 	
 	public static Supplier<String> directory = () -> CheckOS.directory;
 	public static Supplier<String> classPath = () -> Discord.class.getProtectionDomain().getCodeSource().getLocation().getPath();
