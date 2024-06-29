@@ -44,7 +44,7 @@ public final class GuildVoiceUpdateListener extends ListenerAdapter {
 						assert voiceChannel != null;
 						if(voiceChannel.getMembers().isEmpty()) {
 							String oldName = voiceChannel.getName();
-							voiceChannel.getManager().setName(oldName + " [Pending Remove]").queue();
+							voiceChannel.getManager().setName(oldName + " [Removing in 5s]").queue();
 							for(int i = 5; i >= 0; i--) {
 								voiceChannel = guild.getVoiceChannelById(s);
                                 assert voiceChannel != null;
@@ -59,7 +59,7 @@ public final class GuildVoiceUpdateListener extends ListenerAdapter {
 									if(i == 0) {
 										voiceChannel.delete().queue();
 										channelId.remove(s);
-										Log.setMessage(Discord.loggy.log(Level.INFO, String.format("removed VoiceChannel[name=%s, id%s]", voiceChannel.getName(), voiceChannel.getId())));
+										Log.setMessage(Discord.loggy.log(Level.INFO, String.format("VoiceChannel[name=%s, id%s] -> removed", voiceChannel.getName(), voiceChannel.getId())));
 									}
 								}else {
 									voiceChannel.getManager().setName(oldName).queue();
@@ -87,7 +87,7 @@ public final class GuildVoiceUpdateListener extends ListenerAdapter {
 				String name = event.getMember().getEffectiveName().isEmpty() ? "null" : event.getMember().getEffectiveName();
 				category.createVoiceChannel(name).queue(voiceChannel -> {
 					channelId.put(voiceChannel.getId(), voiceChannel.getId());
-					Log.setMessage(Discord.loggy.log(Level.INFO, String.format("created VoiceChannel[name=%s, id%s]", voiceChannel.getName(), voiceChannel.getId())));
+					Log.setMessage(Discord.loggy.log(Level.INFO, String.format("VoiceChannel[name=%s, id%s] -> created", voiceChannel.getName(), voiceChannel.getId())));
 					guild.moveVoiceMember(member, voiceChannel).queue();
 				});}
 		}

@@ -33,13 +33,15 @@ public final class JavaDiscordAPI {
 				.addEventListeners(new GuildVoiceUpdateListener())
 				.addEventListeners(new ShutdownListener());
 
-		worker1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				GuildVoiceUpdateListener.randomRemoveChannelByWorker();
-			}
-		});
-		//worker1.start();
+		{
+			worker1 = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					GuildVoiceUpdateListener.randomRemoveChannelByWorker();
+				}
+			});
+			//worker1.start();
+		}
 
         try {
             jda = jdaBuilder.build().awaitReady();
